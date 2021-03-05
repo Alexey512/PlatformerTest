@@ -4,10 +4,8 @@ using Assets.Scrips.Common.FSM;
 using Assets.Scrips.Common.InputSystem;
 using Assets.Scrips.Common.Storage;
 using Assets.Scrips.Common.Visual;
-using Assets.Scrips.Game;
 using Assets.Scrips.Game.Config;
 using Assets.Scrips.Game.Scenes;
-using Assets.Scrips.Game.Timers;
 using Assets.Scripts.Common.UI;
 using UnityEngine;
 using Zenject;
@@ -42,7 +40,6 @@ namespace Assets.Scrips
 
             Container.Bind<IDataStorage>().To<DataStorage>().AsSingle();
 			Container.Bind<IGameConfig>().FromInstance(new GameConfig(_gameConfig));
-			Container.Bind(typeof(ITimersController), typeof(IDisposable), typeof(ITickable)).To<TimersController>().AsSingle();
 
 			Container.Bind(typeof(IActionsSequencer), typeof(ITickable)).To<ActionsSequencer>().AsSingle();
 
@@ -53,9 +50,9 @@ namespace Assets.Scrips
             Container.Bind<IVisualFactory>().To<VisualFactory>().FromInstance(_visualFactory).AsSingle();
             Container.Bind<IPrefabsFactory>().To<PrefabsFactory>().FromInstance(_prefabsFactory).AsSingle();
             Container.Bind<IWindowFactory>().To<WindowFactory>().FromInstance(_windowFactory).AsSingle();
-	        //Container.QueueForInject(_visualFactory);
-            //Container.QueueForInject(_prefabsFactory);
-            //Container.QueueForInject(_windowFactory);
+	        Container.QueueForInject(_visualFactory);
+            Container.QueueForInject(_prefabsFactory);
+            Container.QueueForInject(_windowFactory);
 
             Container.Bind(typeof(GameStatesManager), typeof(ITickable)).To<GameStatesManager>().AsSingle();
 

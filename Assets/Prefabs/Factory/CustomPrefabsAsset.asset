@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Prefabs:
   - Id: GameField
-    Prefab: {fileID: 4323094505899882125, guid: 05c5ce215eed9c248a3cc493be95d7aa,
+    Prefab: {fileID: 4986888275140151626, guid: 182cbd9d0145fc94ca25073e59291234,
       type: 3}

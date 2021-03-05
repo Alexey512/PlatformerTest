@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Assets.Scrips.Common.FSM;
 using Assets.Scrips.Common.Visual;
+using Assets.Scripts.Game.Scenes;
 
 namespace Assets.Scrips.Game.Scenes
 {
@@ -14,7 +15,7 @@ namespace Assets.Scrips.Game.Scenes
 
 		private readonly VisualRoot _visualRoot;
 
-		private GameScene _field;
+		private GameField _field;
 
 		public GameState(IPrefabsFactory prefabsFactory, VisualRoot visualRoot) : base("Game")
 		{
@@ -24,7 +25,7 @@ namespace Assets.Scrips.Game.Scenes
 
 		public override void Enter(State prevState)
 		{
-			_field = _prefabsFactory.Create<GameScene>("GameField", _visualRoot.Root);
+			_field = _prefabsFactory.Create<GameField>("GameField", _visualRoot.Root);
 
 
 		}
