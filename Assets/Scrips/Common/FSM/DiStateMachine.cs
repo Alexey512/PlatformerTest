@@ -7,7 +7,7 @@ using Zenject;
 
 namespace Assets.Scrips.Common.FSM
 {
-	public class DiStateMachine: StateMachine//, ITickable
+	public class DiStateMachine: StateMachine, IStateMachine
 	{
 		private readonly DiContainer _diContainer;
 
@@ -25,10 +25,5 @@ namespace Assets.Scrips.Common.FSM
 		{
 			return AddState(_diContainer.Instantiate<T>());
 		}
-
-		//public void Tick()
-		//{
-		//	Update();
-		//}
 	}
 }

@@ -41,10 +41,10 @@ namespace Assets.Scrips.Common.FSM
 		}
 		*/
 
-		public abstract void Enter(State prevState);
+		public virtual void Enter(State prevState) {}
 
-		public abstract void Exit(State nextState);
+		public virtual void Exit(State nextState) {}
 
-		public abstract void Update();
+		public virtual void Update() {}
 	}
 }

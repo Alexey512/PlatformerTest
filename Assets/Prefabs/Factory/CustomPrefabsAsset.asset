@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61e810d523f7c124fb4ddf042b6ed9d0, type: 3}
   m_Name: CustomPrefabsAsset
   m_EditorClassIdentifier: 
-  _Prefabs: []
+  _Prefabs:
+  - Id: GameField
+    Prefab: {fileID: 4323094505899882125, guid: 05c5ce215eed9c248a3cc493be95d7aa,
+      type: 3}

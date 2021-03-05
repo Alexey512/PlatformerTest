@@ -36,8 +36,8 @@ namespace Assets.Scrips
 
 		public override void InstallBindings()
 		{
-			//Container.Bind(typeof(DiStateMachine), typeof(ITickable)).To<DiStateMachine>().AsTransient();
-			
+			Container.Bind<StateMachineFactory>().AsSingle();
+
 			Container.Bind<IInputManager>().To<InputManager>().FromNewComponentOnRoot().AsSingle();
 
             Container.Bind<IDataStorage>().To<DataStorage>().AsSingle();
@@ -53,14 +53,11 @@ namespace Assets.Scrips
             Container.Bind<IVisualFactory>().To<VisualFactory>().FromInstance(_visualFactory).AsSingle();
             Container.Bind<IPrefabsFactory>().To<PrefabsFactory>().FromInstance(_prefabsFactory).AsSingle();
             Container.Bind<IWindowFactory>().To<WindowFactory>().FromInstance(_windowFactory).AsSingle();
-	        Container.QueueForInject(_visualFactory);
-            Container.QueueForInject(_prefabsFactory);
-            Container.QueueForInject(_windowFactory);
+	        //Container.QueueForInject(_visualFactory);
+            //Container.QueueForInject(_prefabsFactory);
+            //Container.QueueForInject(_windowFactory);
 
-            //Container.Bind<GameStatesManager>().AsSingle();
             Container.Bind(typeof(GameStatesManager), typeof(ITickable)).To<GameStatesManager>().AsSingle();
-
-            //Container.Bind(typeof(GameScene), typeof(IInitializable), typeof(IDisposable)).To<GameScene>().FromComponentsInHierarchy().AsTransient();
 
             Container.Resolve<GameStatesManager>().Start();
 		}

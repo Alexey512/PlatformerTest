@@ -13,6 +13,7 @@ namespace Assets.Scrips.Common.FSM
 		
 		private State _initialState;
 
+		//TODO: States Stack
 
 		private readonly Dictionary<string, State> _states = new Dictionary<string, State>();
 
