@@ -22,3 +22,6 @@ MonoBehaviour:
   - Id: Enemy
     Prefab: {fileID: 5862405474630928420, guid: 97b08ca0dae78d546a4e586464fd53c2,
       type: 3}
+  - Id: Bullet
+    Prefab: {fileID: 7762093743265148864, guid: f60bb96a24135f4428e1f602596deb25,
+      type: 3}

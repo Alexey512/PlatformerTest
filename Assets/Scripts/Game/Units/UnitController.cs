@@ -10,9 +10,9 @@ using Zenject;
 
 namespace Assets.Scripts.Game.Units
 {
-	public class UnitController<TModel>: MonoBehaviour, IUnit where TModel: UnitModel
+	public class UnitController<TModel>: MonoBehaviour, IUnit where TModel: UnitModel, new()
 	{
-		public TModel Model { get; protected set; }
+		public TModel Model { get; protected set; } = new TModel();
 		
 		public KinematicObject Owner => _owner;
 

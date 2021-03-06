@@ -22,7 +22,8 @@ namespace Assets.Scrips.Game.Player
 
 	public enum PlayerEventType
 	{
-		Damage
+		Damage,
+		Shoot
 	}
 
 	public class PlayerState: UnitState<PlayerController, PlayerModel>

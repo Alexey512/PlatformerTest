@@ -9,12 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0b7987dbbcaac248bc5c20e2ec33bd9, type: 3}
-  m_Name: PlayerConfig
+  m_Script: {fileID: 11500000, guid: 568b901d434249647a772a373f047ce6, type: 3}
+  m_Name: Bullet Config
   m_EditorClassIdentifier: 
-  MinSpeed: 2
-  MaxSpeed: 5
-  Speed: 3
-  JumpHeight: 6.5
-  MaxHealth: 100
-  WeaponId: Bullet
+  Speed: 10
+  Damage: 30

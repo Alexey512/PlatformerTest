@@ -1,15 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Assets.Scripts.Game.Units.Bullet;
+using UnityEngine;
+using Zenject;
 
 namespace Assets.Scripts.Game.Units.Enemy
 {
 	public class EnemyController: UnitController<EnemyModel>
 	{
+		[Inject]
+		private EnemyConfig _config;
+		
 		protected override void OnInitialize()
 		{
+			Model.Health = Random.Range(_config.MinHealth, _config.MaxHealth);
+
 			Owner.UnitCollision += UnitCollision;
 
 			StateMachine.AddState<MoveState>(new []{ this });
@@ -22,7 +29,19 @@ namespace Assets.Scripts.Game.Units.Enemy
 
 		private void UnitCollision(IUnit unit)
 		{
-			StateMachine.HandleEvent(EnemyEventType.Damage);
+			var bullet = unit.GetModel<BulletModel>();
+			if (bullet != null)
+			{
+				Model.Health -= bullet.Damage;
+				if (Model.Health <= 0)
+				{
+					StateMachine.HandleEvent(EnemyEventType.Damage);
+				}
+			}
+			else
+			{
+				StateMachine.HandleEvent(EnemyEventType.Damage);
+			}
 		}
 	}
 }

@@ -22,7 +22,5 @@ namespace Assets.Scripts.Game.Units.Enemy
 			velocity.x = -Random.Range(Config.MinSpeed, Config.MaxSpeed);
 			Unit.Owner.Velocity = velocity;
 		}
-
-
 	}
 }

@@ -19,6 +19,9 @@ namespace Assets.Scripts.Game.Units
 		private LayerMask _ignoreLayers;
 
 		[SerializeField]
+		private LayerMask _ignoreCollide;
+
+		[SerializeField]
 		private Collider2D _collider;
 
 		[SerializeField]
@@ -47,6 +50,15 @@ namespace Assets.Scripts.Game.Units
 				_body.freezeRotation = true;
 				_body.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
 				_body.gravityScale = _gravityScale;
+			}
+
+			var ignoreLayers = _ignoreCollide.HasLayers();
+			for (int i = 0; i < ignoreLayers.Length; i++)
+			{
+				if (ignoreLayers[i])
+				{
+					Physics2D.IgnoreLayerCollision(i, gameObject.layer);
+				}
 			}
 		}
 

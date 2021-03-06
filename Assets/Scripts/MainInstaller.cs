@@ -10,6 +10,7 @@ using Assets.Scrips.Game.Scenes;
 using Assets.Scripts.Common.UI;
 using Assets.Scripts.Game.Player;
 using Assets.Scripts.Game.Track;
+using Assets.Scripts.Game.Units.Bullet;
 using Assets.Scripts.Game.Units.Enemy;
 using UnityEngine;
 using Zenject;
@@ -23,6 +24,9 @@ namespace Assets.Scrips
 
 		[SerializeField]
 		private EnemyConfig _enemyConfig;
+
+		[SerializeField]
+		private BulletConfig _bulletConfig;
 
 		[SerializeField]
 		private WindowRoot _windowRoot;
@@ -46,6 +50,7 @@ namespace Assets.Scrips
 		{
 			Container.Bind<PlayerConfig>().FromInstance(_playerConfig);
 			Container.Bind<EnemyConfig>().FromInstance(_enemyConfig);
+			Container.Bind<BulletConfig>().FromInstance(_bulletConfig);
 
 			Container.Bind<StateMachineFactory>().AsSingle();
 

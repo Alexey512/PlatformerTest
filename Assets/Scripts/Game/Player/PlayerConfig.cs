@@ -20,5 +20,9 @@ namespace Assets.Scrips.Game.Player
 		public float JumpHeight = 6.5f;
 
 		public float MaxHealth = 100f;
+
+		public string WeaponId = string.Empty;
+
+		public float RoF = 0.3f;
 	}
 }
