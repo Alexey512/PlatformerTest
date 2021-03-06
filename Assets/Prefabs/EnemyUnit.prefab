@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5862405474630928442}
   - component: {fileID: 5862405474630928440}
   - component: {fileID: 5862405474630928421}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EnemyUnit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,7 +48,7 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.5}
+  m_Offset: {x: 0, y: 0.59}
   m_Size: {x: 0.5, y: 1}
   m_Direction: 0
 --- !u!50 &5862405474630928442
@@ -85,9 +85,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _body: {fileID: 5862405474630928442}
-  _groundMask:
+  _ignoreLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   _collider: {fileID: 5862405474630928443}
   _gravityScale: 1.5
 --- !u!114 &5862405474630928421
@@ -113,7 +113,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5862405475068278714}
   - component: {fileID: 5862405475068278715}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: New Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +128,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5862405475068278693}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0166, y: 0.499, z: 0}
+  m_LocalPosition: {x: -0.0166, y: 0.569, z: 0}
   m_LocalScale: {x: 4.7871814, y: 6.9920444, z: 1}
   m_Children: []
   m_Father: {fileID: 5862405476425858281}

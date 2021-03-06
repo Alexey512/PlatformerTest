@@ -10,8 +10,10 @@ using Zenject;
 
 namespace Assets.Scripts.Game.Units
 {
-	public class UnitController: MonoBehaviour
+	public class UnitController<TModel>: MonoBehaviour, IUnit where TModel: UnitModel
 	{
+		public TModel Model { get; protected set; }
+		
 		public KinematicObject Owner => _owner;
 
 		[SerializeField]
@@ -45,6 +47,11 @@ namespace Assets.Scripts.Game.Units
 			StateMachine?.Update();
 
 			OnUpdate();
+		}
+
+		public T GetModel<T>() where T : UnitModel
+		{
+			return Model as T;
 		}
 	}
 }

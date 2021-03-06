@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Assets.Scrips.Common.FSM;
+using EventArgs = Assets.Scrips.Common.FSM.EventArgs;
 
 namespace Assets.Scrips.Game.Scenes
 {
@@ -13,7 +14,7 @@ namespace Assets.Scrips.Game.Scenes
 		{
 		}
 
-		public override void Enter(State prevState)
+		public override void Enter(State prevState, EventArgs args)
 		{
 			throw new NotImplementedException();
 		}

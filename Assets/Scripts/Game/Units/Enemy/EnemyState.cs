@@ -12,9 +12,14 @@ namespace Assets.Scripts.Game.Units.Enemy
 		Idle,
 		Move,
 		Death,
-	}	
-	
-	public class EnemyState: UnitState<EnemyController>
+	}
+
+	public enum EnemyEventType
+	{
+		Damage
+	}
+
+	public class EnemyState: UnitState<EnemyController, EnemyModel>
 	{
 		[Inject]
 		protected EnemyConfig Config { get; }

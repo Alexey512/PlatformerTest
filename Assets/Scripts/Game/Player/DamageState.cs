@@ -4,22 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Assets.Scrips.Common.FSM;
+using Assets.Scrips.Game.Player;
 using UnityEngine;
 using EventArgs = Assets.Scrips.Common.FSM.EventArgs;
 
-namespace Assets.Scrips.Game.Player
+namespace Assets.Scripts.Game.Player
 {
-	public class JumpState: PlayerState
+	public class DamageState: PlayerState
 	{
-		public JumpState(PlayerController player) : base(PlayerStateType.Jump, player)
+		public DamageState(PlayerController player) : base(PlayerStateType.Damage, player)
 		{
 		}
 
 		public override void Enter(State prevState, EventArgs args)
 		{
-			if (Unit.Owner.IsGrounded)
+			if (args != null)
 			{
-				Unit.Owner.Velocity = new Vector2(Unit.Owner.Velocity.x, Config.JumpHeight);
+				float damage = args.GetValue<float>("Damage");
+				Debug.Log($"Damage {damage}");
 			}
 
 			Owner.PopState();

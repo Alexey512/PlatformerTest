@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2153044437303296251}
   - component: {fileID: 2153044437303296249}
   - component: {fileID: 2153044437303296228}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PlayerUnit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,15 +84,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d95ab6b80e00fed43a1131f9a6cd6ee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 1
-  JumpHeight: 6.5
   _body: {fileID: 2153044437303296251}
-  _groundMask:
+  _ignoreLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   _collider: {fileID: 2153044437303296250}
-  gravityScale: 1.5
-  moveDirection: 0
+  _gravityScale: 1.5
 --- !u!114 &2153044437303296228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,7 +113,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2153044437671444347}
   - component: {fileID: 2153044437671444346}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: New Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

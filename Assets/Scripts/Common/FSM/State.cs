@@ -25,7 +25,7 @@ namespace Assets.Scrips.Common.FSM
 			Transitions.Add(new Transition(targetState, eventId, condition, handler));
 		}
 
-		public virtual void Enter(State prevState) {}
+		public virtual void Enter(State prevState, EventArgs args = null) {}
 
 		public virtual void Exit(State nextState) {}
 

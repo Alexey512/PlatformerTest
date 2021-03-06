@@ -12,6 +12,7 @@ using Assets.Scripts.Game.Track;
 using Assets.Scripts.Game.Units.Enemy;
 using UnityEngine;
 using Zenject;
+using EventArgs = Assets.Scrips.Common.FSM.EventArgs;
 using Random = UnityEngine.Random;
 
 namespace Assets.Scrips.Game.Scenes
@@ -44,7 +45,7 @@ namespace Assets.Scrips.Game.Scenes
 		{
 		}
 
-		public override void Enter(State prevState)
+		public override void Enter(State prevState, EventArgs args)
 		{
 			_player = _prefabsFactory.Create<PlayerController>("Player", _visualRoot.Root);
 

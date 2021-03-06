@@ -10,7 +10,7 @@ using Zenject;
 
 namespace Assets.Scripts.Game.Units
 {
-	public class UnitState<TController>: State where TController: UnitController
+	public class UnitState<TController, TModel>: State where TController: UnitController<TModel> where TModel: UnitModel
 	{
 		protected TController Unit { get; }
 		

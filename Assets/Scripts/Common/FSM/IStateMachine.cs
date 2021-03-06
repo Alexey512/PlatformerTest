@@ -20,6 +20,10 @@ namespace Assets.Scrips.Common.FSM
 
 		void PopState();
 
+		void HandleEvent(string eventId, EventArgs args = null);
+
+		void HandleEvent<T>(T value, EventArgs args = null) where T : struct;
+
 		void HandleEvent(Event e);
 
 		State AddState(State state);		
@@ -27,6 +31,12 @@ namespace Assets.Scrips.Common.FSM
 		State AddState<T>(IEnumerable<object> args) where T : State;
 
 		State AddState<T>() where T : State;
+
+		void AddTransition(string targetState, string eventId, Func<EventArgs, bool> condition = null,
+			Action<EventArgs> handler = null);
+
+		void AddTransition<T, U>(T targetState, U eventType, Func<EventArgs, bool> condition = null,
+			Action<EventArgs> handler = null) where T : struct where U : struct;
 
 		void Update();
 	}

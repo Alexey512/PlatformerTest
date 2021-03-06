@@ -17,6 +17,8 @@ namespace Assets.Scrips.Common.FSM
 
 		private readonly Queue<Event> _eventsQueue = new Queue<Event>();
 
+		private readonly List<Transition> _anyTransitions = new List<Transition>();
+
 		public void Start()
 		{
 			if (_initialState != null)
@@ -33,6 +35,16 @@ namespace Assets.Scrips.Common.FSM
 		public void SetInitialState<T>(T value) where T: struct
 		{
 			SetInitialState(value.ToString());
+		}
+
+		public void HandleEvent(string eventId, EventArgs args = null)
+		{
+			_eventsQueue.Enqueue(new Event { Id = eventId, Args = args});
+		}
+
+		public void HandleEvent<T>(T value, EventArgs args = null) where T : struct
+		{
+			HandleEvent(value.ToString(), args);
 		}
 
 		public void HandleEvent(Event e)
@@ -95,6 +107,16 @@ namespace Assets.Scrips.Common.FSM
 			nextState.Enter(currState);
 		}
 
+		public void AddTransition(string targetState, string eventId, Func<EventArgs, bool> condition = null, Action<EventArgs> handler = null)
+		{
+			_anyTransitions.Add(new Transition(targetState, eventId, condition, handler));
+		}
+
+		public void AddTransition<T, U>(T targetState, U eventType, Func<EventArgs, bool> condition = null, Action<EventArgs> handler = null) where T : struct where U : struct
+		{
+			AddTransition(targetState.ToString(), eventType.ToString(), condition, handler);
+		}
+
 		public void Update()
 		{
 			if (_statesStack.Count == 0)
@@ -113,23 +135,35 @@ namespace Assets.Scrips.Common.FSM
 			if (_eventsQueue.Count > 0)
 			{
 				var stateEvent = _eventsQueue.Dequeue();
-				
-				foreach (var transition in currentState.Transitions)
+
+				if (!CheckTransitions(stateEvent, currentState.Transitions))
 				{
-					if (transition.Check(stateEvent))
-					{
-						var nextState = GetState(transition.StateName);
-						if (nextState == null)
-						{
-							break;
-						}			
-
-						transition.Handle(stateEvent.Args);
-
-						EnterState(nextState);
-					}
+					CheckTransitions(stateEvent, _anyTransitions);
 				}
 			}
+		}
+
+		private bool CheckTransitions(Event stateEvent, List<Transition> transitions)
+		{
+			foreach (var transition in transitions)
+			{
+				if (transition.Check(stateEvent))
+				{
+					var nextState = GetState(transition.StateName);
+					if (nextState == null)
+					{
+						break;
+					}			
+
+					transition.Handle(stateEvent.Args);
+
+					EnterState(nextState, stateEvent.Args);
+
+					return true;
+				}
+			}
+
+			return false;
 		}
 
 		private State GetState(string name)
@@ -143,7 +177,7 @@ namespace Assets.Scrips.Common.FSM
 			return state;
 		}
 
-		private void EnterState(State nextState)
+		private void EnterState(State nextState, EventArgs args = null)
 		{
 			if (nextState == null)
 				return;
@@ -156,7 +190,7 @@ namespace Assets.Scrips.Common.FSM
 			}
 
 			_statesStack.Push(nextState);
-			nextState.Enter(currState);
+			nextState.Enter(currState, args);
 		}
 	}
 }

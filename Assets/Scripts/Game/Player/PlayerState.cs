@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Assets.Scrips.Common.FSM;
 using Assets.Scrips.Common.InputSystem;
+using Assets.Scripts.Game.Player;
 using Assets.Scripts.Game.Units;
 using Zenject;
 
@@ -15,10 +16,16 @@ namespace Assets.Scrips.Game.Player
 		Idle,
 		Run,
 		Jump,
+		Damage,
 		Shoot
 	}
-	
-	public class PlayerState: UnitState<PlayerController>
+
+	public enum PlayerEventType
+	{
+		Damage
+	}
+
+	public class PlayerState: UnitState<PlayerController, PlayerModel>
 	{
 		[Inject]
 		protected PlayerConfig Config { get; }

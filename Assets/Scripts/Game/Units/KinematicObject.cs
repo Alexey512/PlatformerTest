@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Assets.Scripts.Common.Utils;
 using UnityEngine;
 
 namespace Assets.Scripts.Game.Units
 {
 	public class KinematicObject: MonoBehaviour
 	{
+		public event Action<IUnit> UnitCollision; 
+		
 		[SerializeField]
 		private Rigidbody2D _body;
 
 		[SerializeField]
-		private LayerMask _groundMask;
+		private LayerMask _ignoreLayers;
 
 		[SerializeField]
 		private Collider2D _collider;
@@ -44,6 +47,20 @@ namespace Assets.Scripts.Game.Units
 				_body.freezeRotation = true;
 				_body.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
 				_body.gravityScale = _gravityScale;
+			}
+		}
+
+		private void OnCollisionEnter2D(Collision2D collision)
+		{
+			if (_ignoreLayers.HasLayer(collision.gameObject.layer) || collision.gameObject.layer == gameObject.layer)
+			{
+				return;
+			}
+
+			var unit = collision.collider.GetComponent<IUnit>();
+			if (unit != null)
+			{
+				UnitCollision?.Invoke(unit);
 			}
 		}
 

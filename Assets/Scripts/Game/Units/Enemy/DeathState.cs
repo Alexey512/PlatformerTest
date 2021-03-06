@@ -7,21 +7,17 @@ using Assets.Scrips.Common.FSM;
 using UnityEngine;
 using EventArgs = Assets.Scrips.Common.FSM.EventArgs;
 
-namespace Assets.Scrips.Game.Player
+namespace Assets.Scripts.Game.Units.Enemy
 {
-	public class IdleState: PlayerState
+	public class DeathState: EnemyState
 	{
-		public IdleState(PlayerController owner) : base(PlayerStateType.Idle, owner)
+		public DeathState(EnemyController unit) : base(EnemyStateType.Death, unit)
 		{
 		}
 
 		public override void Enter(State prevState, EventArgs args)
 		{
-			Owner.SwitchState(PlayerStateType.Run);
-		}
-
-		public override void Update()
-		{
+			GameObject.Destroy(Unit.gameObject);
 		}
 	}
 }

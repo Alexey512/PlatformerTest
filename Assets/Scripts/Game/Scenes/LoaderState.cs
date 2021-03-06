@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Assets.Scrips.Common.FSM;
 using Assets.Scrips.Common.Visual;
+using EventArgs = Assets.Scrips.Common.FSM.EventArgs;
 
 namespace Assets.Scrips.Game.Scenes
 {
@@ -17,7 +18,7 @@ namespace Assets.Scrips.Game.Scenes
 			_prefabsFactory = prefabsFactory;
 		}
 
-		public override void Enter(State prevState)
+		public override void Enter(State prevState, EventArgs args)
 		{
 			_prefabsFactory.Load();
 		}
