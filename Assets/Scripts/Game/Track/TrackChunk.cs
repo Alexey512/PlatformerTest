@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Assets.Scripts.Game.Track
 {
@@ -11,7 +12,18 @@ namespace Assets.Scripts.Game.Track
 	{
 		[SerializeField]
 		private Collider2D _collider;
-		
+
+		[SerializeField]
+		private SpriteRenderer _back;
+
+		private void Start()
+		{
+			if (_back)
+			{
+				_back.color = Random.ColorHSV();
+			}
+		}
+
 		public Rect GetRect()
 		{
 			if (_collider == null)

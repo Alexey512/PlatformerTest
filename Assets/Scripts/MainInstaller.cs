@@ -65,7 +65,7 @@ namespace Assets.Scrips
             Container.QueueForInject(_prefabsFactory);
             Container.QueueForInject(_windowFactory);
 
-            Container.Bind<PlayerFactory>().AsSingle();
+            //Container.Bind<PlayerFactory>().AsSingle();
 
             Container.Bind(typeof(GameStatesManager), typeof(ITickable)).To<GameStatesManager>().AsSingle();
 

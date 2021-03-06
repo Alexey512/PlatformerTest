@@ -13,9 +13,13 @@ namespace Assets.Scrips.Game.Player
 	{
 		public float MinSpeed = 2;
 
+		public float MoveForce = 365f;			// Amount of force added to move the player left and right.
+
 		public float MaxSpeed = 7;
 
 		public float Speed = 7;
+
+		public float JumpHeight = 6.5f;
 
 		public float Acceleration = 3;
 

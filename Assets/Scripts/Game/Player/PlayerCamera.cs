@@ -37,7 +37,7 @@ namespace Assets.Scripts.Game.Player
 				return;
 			}
 
-			var followPos = _player.Position + _offset;
+			var followPos = _player.Owner.Position + _offset;
 			_camera.transform.position = new Vector3(followPos.x, followPos.y, _camera.transform.position.z);
 		}
 	}

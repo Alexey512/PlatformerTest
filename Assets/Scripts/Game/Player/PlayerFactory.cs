@@ -11,7 +11,11 @@ using Zenject;
 
 namespace Assets.Scripts.Game.Player
 {
-	public class PlayerFactory: ControllerFactory<PlayerView, PlayerController>
+	public class PlayerFactory : PlaceholderFactory<PlayerController>
+	{
+	}
+	
+	/*public class PlayerFactory: ControllerFactory<PlayerView, PlayerController>
 	{
 		private readonly VisualRoot _root;
 
@@ -29,5 +33,5 @@ namespace Assets.Scripts.Game.Player
 			}
 			return controller;
 		}
-	}
+	}*/
 }

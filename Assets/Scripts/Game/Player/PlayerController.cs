@@ -6,41 +6,25 @@ using System.Threading.Tasks;
 using Assets.Scrips.Common.FSM;
 using Assets.Scrips.Common.InputSystem;
 using Assets.Scripts.Common.Visual;
+using Assets.Scripts.Game.Units;
 using UnityEngine;
 using Zenject;
 
 namespace Assets.Scrips.Game.Player
 {
-	[ViewName("PlayerView")]
-	public class PlayerController: IController<PlayerView>
+	public class PlayerController: MonoBehaviour
 	{
-		public PlayerView View { get; set; }
+		public KinematicObject Owner => _owner;
 
-		public Vector2 MoveForce { get; set; }
-
-		public Vector2 Position
-		{
-			get => View != null ? View.transform.position : Vector3.zero;
-			set
-			{
-				if (View != null)
-				{
-					View.transform.position = value;
-				}
-			}
-		}
+		[SerializeField]
+		private KinematicObject _owner;
 
 		private IStateMachine _fsm;
 
-		private IInputManager _inputManager;
-
-		//private float _moveForce;
-
-		public PlayerController(IInputManager inputManager, StateMachineFactory fsm)
+		[Inject]
+		private void Construct(StateMachineFactory fsm)
 		{
 			_fsm = fsm.Create();
-
-			_inputManager = inputManager;
 
 			InitializeStates();
 		}
@@ -51,17 +35,13 @@ namespace Assets.Scrips.Game.Player
 			{
 				_fsm.Update();
 			}
-
-			if (View != null)
-			{
-				View.SetForce(MoveForce);
-			}
 		}
 
 		private void InitializeStates()
 		{
 			_fsm.AddState<IdleState>(new []{ this });
 			_fsm.AddState<RunState>(new []{ this });
+			_fsm.AddState<JumpState>(new []{ this });
 
 			_fsm.SetInitialState("Idle");
 

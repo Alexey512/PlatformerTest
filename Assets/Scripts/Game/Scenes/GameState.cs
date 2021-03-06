@@ -21,8 +21,8 @@ namespace Assets.Scrips.Game.Scenes
 		[Inject]
 		private readonly VisualRoot _visualRoot;
 
-		[Inject]
-		private readonly PlayerFactory _playerFactory; 
+		//[Inject]
+		//private readonly PlayerFactory _playerFactory; 
 
 		[Inject]
 		private readonly TrackManager _trackManager;
@@ -46,9 +46,10 @@ namespace Assets.Scrips.Game.Scenes
 		{
 			//_field = _prefabsFactory.Create<GameField>("GameField", _visualRoot.Root);
 
-			_player = _playerFactory.Create();
+			//_player = _playerFactory.Create();
+			_player = _prefabsFactory.Create<PlayerController>("Player", _visualRoot.Root);
 
-			_player.Position = _trackManager.GetSpawnPosition();
+			_player.Owner.Position = _trackManager.GetSpawnPosition();
 
 			_camera.SetPlayer(_player);
 
