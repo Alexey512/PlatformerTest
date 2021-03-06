@@ -10,12 +10,6 @@ namespace Assets.Scripts.Game.Units
 	public class KinematicObject: MonoBehaviour
 	{
 		[SerializeField]
-		public float Speed = 1.0f;
-		
-		[SerializeField]
-		public float JumpHeight = 6.5f;
-
-		[SerializeField]
 		private Rigidbody2D _body;
 
 		[SerializeField]
@@ -24,13 +18,10 @@ namespace Assets.Scripts.Game.Units
 		[SerializeField]
 		private Collider2D _collider;
 
-		public float gravityScale = 1.5f;
+		[SerializeField]
+		private float _gravityScale = 1.5f;
 
-		public float moveDirection = 0;
-
-		private Vector2 _moveForce;
-
-		//private bool _isGrounded = false;
+		private Vector2 _velocity;
 
 		public bool IsGrounded { get; private set; }
 
@@ -46,47 +37,13 @@ namespace Assets.Scripts.Game.Units
 			set => _velocity = value;
 		}
 
-		private Vector2 _velocity;
-
-		public void Jump()
-		{
-			if (_body && IsGrounded)
-			{
-				_body.velocity = new Vector2(_body.velocity.x, JumpHeight);
-			}
-		}
-
 		private void Start()
 		{
 			if (_body)
 			{
 				_body.freezeRotation = true;
 				_body.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-				_body.gravityScale = gravityScale;
-			}
-		}
-
-		private void Update()
-		{
-			// Movement controls
-			if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) && (IsGrounded || Mathf.Abs(_body.velocity.x) > 0.01f))
-			{
-				moveDirection = Input.GetKey(KeyCode.A) ? -1 : 1;
-			}
-			else
-			{
-				if (IsGrounded || _body.velocity.magnitude < 0.01f)
-				{
-					moveDirection = 0;
-				}
-			}
-
-			//moveDirection = 1;
-
-			// Jumping
-			if (Input.GetKeyDown(KeyCode.W) && IsGrounded)
-			{
-				_body.velocity = new Vector2(_body.velocity.x, JumpHeight);
+				_body.gravityScale = _gravityScale;
 			}
 		}
 
@@ -114,8 +71,6 @@ namespace Assets.Scripts.Game.Units
 					}
 				}
 			}
-
-			//_body.velocity = new Vector2((moveDirection) * Speed, _body.velocity.y);
 
 			_body.velocity = _velocity;
 

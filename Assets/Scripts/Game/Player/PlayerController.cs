@@ -21,6 +21,11 @@ namespace Assets.Scrips.Game.Player
 
 		private IStateMachine _fsm;
 
+		public void StartMove()
+		{
+			_fsm?.Start();
+		}
+
 		[Inject]
 		private void Construct(StateMachineFactory fsm)
 		{
@@ -29,12 +34,9 @@ namespace Assets.Scrips.Game.Player
 			InitializeStates();
 		}
 
-		public void Update()
+		private void Update()
 		{
-			if (_fsm != null)
-			{
-				_fsm.Update();
-			}
+			_fsm?.Update();
 		}
 
 		private void InitializeStates()
@@ -45,7 +47,6 @@ namespace Assets.Scrips.Game.Player
 
 			_fsm.SetInitialState("Idle");
 
-			_fsm.Start();
 		}
 	}
 }

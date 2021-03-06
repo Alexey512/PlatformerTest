@@ -9,20 +9,15 @@ namespace Assets.Scrips.Common.FSM
 {
 	public class StateMachine
 	{
-		private State _currentState;
-		
 		private State _initialState;
+
+		private readonly Stack<State> _statesStack = new Stack<State>();
 
 		//TODO: States Stack
 
 		private readonly Dictionary<string, State> _states = new Dictionary<string, State>();
 
 		private readonly Queue<Event> _eventsQueue = new Queue<Event>();
-
-		public StateMachine()
-		{
-
-		}
 
 		public void Start()
 		{
@@ -57,28 +52,6 @@ namespace Assets.Scrips.Common.FSM
 			return state;
 		}
 
-		/*public void AddEventTransition(string stateName, EventTransition transition)
-		{
-			if (!_states.TryGetValue(stateName, out State state))
-			{
-				Debug.LogAssertion($"State '{state.Name}' not found");
-				return;
-			}
-
-			state.EventTransitions.Add(transition);
-		}
-
-		public void AddConditionalTransition(string stateName, ConditionalTransition transition)
-		{
-			if (!_states.TryGetValue(stateName, out State state))
-			{
-				Debug.LogAssertion($"State '{state.Name}' not found");
-				return;
-			}
-
-			state.ConditionalTransitions.Add(transition);
-		}*/
-
 		public void SwitchState(string name)
 		{
 			var nextState = GetState(name);
@@ -90,18 +63,40 @@ namespace Assets.Scrips.Common.FSM
 			EnterState(nextState);
 		}
 
+		public void PopState()
+		{
+			if (_statesStack.Count < 2)
+			{
+				return;
+			}
+
+			var currState = _statesStack.Pop();
+			var nextState = _statesStack.Peek();
+			
+			currState.Exit(nextState);
+			nextState.Enter(currState);
+		}
+
 		public void Update()
 		{
-			if (_currentState == null)
+			if (_statesStack.Count == 0)
+			{
 				return;
+			}
 
-			_currentState.Update();
+			var currentState = _statesStack.Peek();
+			if (currentState == null)
+			{
+				return;
+			}
+
+			currentState.Update();
 
 			if (_eventsQueue.Count > 0)
 			{
 				var stateEvent = _eventsQueue.Dequeue();
 				
-				foreach (var transition in _currentState.Transitions)
+				foreach (var transition in currentState.Transitions)
 				{
 					if (transition.Check(stateEvent))
 					{
@@ -130,48 +125,20 @@ namespace Assets.Scrips.Common.FSM
 			return state;
 		}
 
-		/*private bool TryPerformEvent()
+		private void EnterState(State nextState)
 		{
-			var stateEvent = _eventsQueue.Dequeue();
-			if (stateEvent != null)
-			{
-				foreach (var transition in _currentState.EventTransitions)
-				{
-					if (transition.TryPerform(stateEvent.Id))
-					{
-						EnterState(transition.TargetState);
-						return true;
-					}
-				}
-			}
-
-			return false;
-		}
-
-		private bool TryPerformCondition()
-		{
-			foreach (var transition in _currentState.ConditionalTransitions)
-			{
-				if (transition.TryPerform())
-				{
-					EnterState(transition.TargetState);
-					return true;
-				}
-			}
-
-			return false;
-		}*/
-
-		private void EnterState(State state)
-		{
-			if (state == null)
+			if (nextState == null)
 				return;
-			
-			var prevState = _currentState;
-			_currentState?.Exit(state);
 
-			_currentState = state;
-			_currentState.Enter(prevState);
+			State currState = null;
+			if (_statesStack.Count > 0)
+			{
+				currState = _statesStack.Peek();
+				currState.Exit(nextState);
+			}
+
+			_statesStack.Push(nextState);
+			nextState.Enter(currState);
 		}
 	}
 }

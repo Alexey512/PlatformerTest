@@ -16,14 +16,12 @@ namespace Assets.Scrips.Game.Player
 
 		public override void Enter(State prevState)
 		{
-			//Player.Owner.Jump();
-
 			if (Player.Owner.IsGrounded)
 			{
 				Player.Owner.Velocity = new Vector2(Player.Owner.Velocity.x, Config.JumpHeight);
 			}
 
-			Owner.SwitchState("Run");
+			Owner.PopState();
 		}
 	}
 }

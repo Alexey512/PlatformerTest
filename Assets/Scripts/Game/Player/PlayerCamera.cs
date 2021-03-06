@@ -21,6 +21,7 @@ namespace Assets.Scripts.Game.Player
 		[SerializeField]
 		private Camera _camera;
 
+		[SerializeField]
 		private Vector2 _offset;
 
 		private PlayerController _player;
