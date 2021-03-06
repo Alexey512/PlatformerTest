@@ -14,5 +14,27 @@ namespace Assets.Scrips.Game.Player
 
 		[SerializeField]
 		private Animation _animation;
+
+		//private float _moveForce;
+
+		private Vector2 _moveForce;
+
+		public void SetForce(Vector2 force)
+		{
+			_moveForce = force;
+		}
+
+		private void UpdateMovement()
+		{
+			if (_body == null)
+				return;
+
+			_body.AddForce(_moveForce);
+		}
+
+		private void FixedUpdate()
+		{
+			UpdateMovement();
+		}
 	}
 }

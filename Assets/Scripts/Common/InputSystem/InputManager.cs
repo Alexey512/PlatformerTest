@@ -15,6 +15,7 @@ namespace Assets.Scrips.Common.InputSystem
 		public event Action<Vector3> MouseUp;
 		public event Action<Vector3, Vector3> MouseMove;
 		public event Action<float> MouseWheel;
+		public bool IsLocked { get; private set; }
 
 		private const float DeltaRegistration = 0.01f;
         private bool _isMouseDown;
@@ -26,7 +27,10 @@ namespace Assets.Scrips.Common.InputSystem
 
         private Vector3? _buttonDownPosition = null;
 
-        public bool IsLocked { get; private set; }
+        public bool GetKey(KeyCode key)
+        {
+	        return Input.GetKey(key);
+        }
 
         public void Lock()
         {
@@ -164,8 +168,8 @@ namespace Assets.Scrips.Common.InputSystem
 	        if (EventSystem.current.IsPointerOverGameObject())
                 return true;
 
-	        //if (IsPointerOverUIObject())
-		     //   return true;
+	        if (IsPointerOverUIObject())
+		        return true;
 
             if (Input.touchCount > 0 && Input.GetTouch(0).phase != TouchPhase.Ended)
             {

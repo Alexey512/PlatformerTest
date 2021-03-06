@@ -5,8 +5,10 @@ using Assets.Scrips.Common.InputSystem;
 using Assets.Scrips.Common.Storage;
 using Assets.Scrips.Common.Visual;
 using Assets.Scrips.Game.Config;
+using Assets.Scrips.Game.Player;
 using Assets.Scrips.Game.Scenes;
 using Assets.Scripts.Common.UI;
+using Assets.Scripts.Game.Player;
 using UnityEngine;
 using Zenject;
 
@@ -14,6 +16,9 @@ namespace Assets.Scrips
 {
     public class MainInstaller : MonoInstaller
 	{
+		[SerializeField]
+		private PlayerConfig _playerConfig;
+		
 		[SerializeField]
 		private WindowRoot _windowRoot;
 
@@ -34,6 +39,8 @@ namespace Assets.Scrips
 
 		public override void InstallBindings()
 		{
+			Container.Bind<PlayerConfig>().FromInstance(_playerConfig);
+			
 			Container.Bind<StateMachineFactory>().AsSingle();
 
 			Container.Bind<IInputManager>().To<InputManager>().FromNewComponentOnRoot().AsSingle();
@@ -53,6 +60,8 @@ namespace Assets.Scrips
 	        Container.QueueForInject(_visualFactory);
             Container.QueueForInject(_prefabsFactory);
             Container.QueueForInject(_windowFactory);
+
+            Container.Bind<PlayerFactory>().AsSingle();
 
             Container.Bind(typeof(GameStatesManager), typeof(ITickable)).To<GameStatesManager>().AsSingle();
 

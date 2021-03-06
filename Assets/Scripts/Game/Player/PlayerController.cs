@@ -5,25 +5,27 @@ using System.Text;
 using System.Threading.Tasks;
 using Assets.Scrips.Common.FSM;
 using Assets.Scrips.Common.InputSystem;
+using Assets.Scripts.Common.Visual;
 using UnityEngine;
 using Zenject;
 
 namespace Assets.Scrips.Game.Player
 {
-	public class PlayerController: MonoBehaviour
+	[ViewName("PlayerView")]
+	public class PlayerController: IController<PlayerView>
 	{
-		private PlayerView _view;
+		public PlayerView View { get; set; }
+
+		public Vector2 MoveForce { get; set; }
+
 
 		private IStateMachine _fsm;
 
 		private IInputManager _inputManager;
 
-		private Vector2 _moveDirection = Vector2.zero;
+		//private float _moveForce;
 
-
-
-		[Inject]
-		private void Construct(IInputManager inputManager, StateMachineFactory fsm)
+		public PlayerController(IInputManager inputManager, StateMachineFactory fsm)
 		{
 			_fsm = fsm.Create();
 
@@ -32,9 +34,27 @@ namespace Assets.Scrips.Game.Player
 			InitializeStates();
 		}
 
+		public void Update()
+		{
+			if (_fsm != null)
+			{
+				_fsm.Update();
+			}
+
+			if (View != null)
+			{
+				View.SetForce(MoveForce);
+			}
+		}
+
 		private void InitializeStates()
 		{
+			_fsm.AddState<IdleState>(new []{ this });
+			_fsm.AddState<RunState>(new []{ this });
 
+			_fsm.SetInitialState("Idle");
+
+			_fsm.Start();
 		}
 	}
 }

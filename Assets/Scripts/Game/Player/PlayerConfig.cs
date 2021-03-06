@@ -7,12 +7,18 @@ using UnityEngine;
 
 namespace Assets.Scrips.Game.Player
 {
+	
+	[CreateAssetMenu(menuName = "Game/Player config")]
 	public class PlayerConfig: ScriptableObject
 	{
-		/// <summary>
-		/// Max horizontal speed of the player.
-		/// </summary>
+		public float MinSpeed = 2;
+
 		public float MaxSpeed = 7;
+
+		public float Speed = 7;
+
+		public float Acceleration = 3;
+
 		/// <summary>
 		/// Initial jump velocity at the start of a jump.
 		/// </summary>

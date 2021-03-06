@@ -17,6 +17,8 @@ namespace Assets.Scrips.Common.InputSystem
 
 		event Action<float> MouseWheel;
 
+		bool GetKey(KeyCode key);
+
 		bool IsLocked { get; }
 
 		void Lock();

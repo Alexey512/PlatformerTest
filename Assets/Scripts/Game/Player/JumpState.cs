@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Assets.Scrips.Game.Player
 {
-	class JumpState
+	public class JumpState: PlayerState
 	{
+		public JumpState(PlayerController player) : base("Jump", player)
+		{
+		}
 	}
 }
