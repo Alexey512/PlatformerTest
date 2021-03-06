@@ -11,13 +11,9 @@ namespace Assets.Scrips.Common.FSM
 	{
 		public string Name { get; private set; }
 
-		public StateMachine Owner { get; set; }
+		public IStateMachine Owner { get; set; }
 
 		public List<Transition> Transitions { get; } = new List<Transition>();
-
-		//public List<EventTransition> EventTransitions { get; } = new List<EventTransition>();
-
-		//public List<ConditionalTransition> ConditionalTransitions { get; } = new List<ConditionalTransition>();
 
 		public State(string name)
 		{
@@ -28,18 +24,6 @@ namespace Assets.Scrips.Common.FSM
 		{
 			Transitions.Add(new Transition(targetState, eventId, condition, handler));
 		}
-
-		/*
-		public void AddTransition(string targetState, string eventId, Action handler = null)
-		{
-			EventTransitions.Add(new EventTransition(targetState, eventId, handler));
-		}
-
-		public void AddTransition(string targetState, ICondition condition, Action handler = null)
-		{
-			ConditionalTransitions.Add(new ConditionalTransition(targetState, condition, handler));
-		}
-		*/
 
 		public virtual void Enter(State prevState) {}
 

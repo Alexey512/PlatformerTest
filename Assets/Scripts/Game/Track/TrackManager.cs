@@ -17,6 +17,11 @@ namespace Assets.Scripts.Game.Track
 			return _spawnMarker != null ? _spawnMarker.transform.position : Vector3.zero;
 		}
 
+		public Vector3 GetEnemySpawnPosition()
+		{
+			return new Vector3(_chunksRect.xMax - _spawnOffset / 2, _chunksRect.yMax);
+		}
+
 		public void SetCamera(Camera camera)
 		{
 			_camera = camera;
@@ -41,11 +46,17 @@ namespace Assets.Scripts.Game.Track
 		[SerializeField]
 		private bool _active;
 
+		private float _spawnOffset = 3.0f;
+
 		private Camera _camera;
 
 		private readonly List<TrackChunk> _chunks = new List<TrackChunk>();
 
 		private readonly Queue<TrackChunk> _chunksPool = new Queue<TrackChunk>();
+
+		private Rect _chunksRect;
+
+		private int _visibleChunksCount;
 
 		private TrackChunk AssignChunk()
 		{
@@ -109,13 +120,12 @@ namespace Assets.Scripts.Game.Track
 			Vector2 camPos = _camera.transform.position;
 
 			float camLeft = camPos.x - halfWidth;
-			float camRight = camPos.x + halfWidth;
+			float camRight = camPos.x + halfWidth + _spawnOffset;
 
-			bool hasChunks;
-			Rect chunksRect = UpdateVisibleChunks(camLeft, camRight, out hasChunks);
+			UpdateVisibleChunks(camLeft, camRight);
 
-			float chunksLeft = chunksRect.xMin;
-			float chunksRight = chunksRect.xMax;
+			float chunksLeft = _chunksRect.xMin;
+			float chunksRight = _chunksRect.xMax;
 
 			while (camRight > chunksRight)
 			{
@@ -151,10 +161,9 @@ namespace Assets.Scripts.Game.Track
 			float camLeft = camPos.x - halfWidth;
 			float camRight = camPos.x + halfWidth;			
 			
-			bool hasChunks;
-			Rect chunksRect = UpdateVisibleChunks(camLeft, camRight, out hasChunks);
+			UpdateVisibleChunks(camLeft, camRight);
 
-			if (!hasChunks)
+			if (_visibleChunksCount == 0)
 			{
 				var chunk = AssignChunk();
 				if (chunk == null)
@@ -163,19 +172,18 @@ namespace Assets.Scripts.Game.Track
 				float chunkPos = camLeft - chunk.GetRect().size.x;
 				chunk.transform.position = new Vector2(chunkPos, 0);
 
-				chunksRect = UpdateVisibleChunks(camLeft, camRight, out hasChunks);
+				UpdateVisibleChunks(camLeft, camRight);
 			}
 
-			return hasChunks;
+			return _visibleChunksCount > 0;
 		}
 
-		private Rect UpdateVisibleChunks(float camLeft, float camRight, out bool hasChunks)
+		private void UpdateVisibleChunks(float camLeft, float camRight)
 		{
-			hasChunks = false;
+			_visibleChunksCount = 0;
 			Rect rect = new Rect { min = new Vector2(float.MaxValue, float.MaxValue), max = new Vector2(float.MinValue, float.MinValue)};
 
 			for (int i = 0; i < transform.childCount; i++)
-			//for (int i = transform.childCount - 1; i >= 0; i--)
 			{
 				var chunk = transform.GetChild(i).GetComponent<TrackChunk>();
 				if (chunk == null || !chunk.gameObject.activeSelf)
@@ -193,12 +201,12 @@ namespace Assets.Scripts.Game.Track
 				}
 
 				rect.min = new Vector2(Mathf.Min(rect.min.x, chunkRect.min.x), Mathf.Min(rect.min.y, chunkRect.min.y));
-				rect.max = new Vector2(Mathf.Max(rect.max.x, chunkRect.max.x), Mathf.Min(rect.max.y, chunkRect.max.y));
+				rect.max = new Vector2(Mathf.Max(rect.max.x, chunkRect.max.x), Mathf.Max(rect.max.y, chunkRect.max.y));
 
-				hasChunks = true;
+				_visibleChunksCount++;
 			}
 
-			return rect;
+			_chunksRect = _visibleChunksCount > 0 ? rect : Rect.zero;
 		}
 
 		private void OnDrawGizmos()

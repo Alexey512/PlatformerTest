@@ -12,41 +12,15 @@ using Zenject;
 
 namespace Assets.Scrips.Game.Player
 {
-	public class PlayerController: MonoBehaviour
+	public class PlayerController: UnitController
 	{
-		public KinematicObject Owner => _owner;
-
-		[SerializeField]
-		private KinematicObject _owner;
-
-		private IStateMachine _fsm;
-
-		public void StartMove()
+		protected override void OnInitialize()
 		{
-			_fsm?.Start();
-		}
+			StateMachine.AddState<IdleState>(new []{ this });
+			StateMachine.AddState<RunState>(new []{ this });
+			StateMachine.AddState<JumpState>(new []{ this });
 
-		[Inject]
-		private void Construct(StateMachineFactory fsm)
-		{
-			_fsm = fsm.Create();
-
-			InitializeStates();
-		}
-
-		private void Update()
-		{
-			_fsm?.Update();
-		}
-
-		private void InitializeStates()
-		{
-			_fsm.AddState<IdleState>(new []{ this });
-			_fsm.AddState<RunState>(new []{ this });
-			_fsm.AddState<JumpState>(new []{ this });
-
-			_fsm.SetInitialState("Idle");
-
+			StateMachine.SetInitialState(PlayerStateType.Idle);
 		}
 	}
 }

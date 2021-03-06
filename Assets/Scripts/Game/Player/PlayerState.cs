@@ -5,23 +5,26 @@ using System.Text;
 using System.Threading.Tasks;
 using Assets.Scrips.Common.FSM;
 using Assets.Scrips.Common.InputSystem;
+using Assets.Scripts.Game.Units;
 using Zenject;
 
 namespace Assets.Scrips.Game.Player
 {
-	public class PlayerState: State
+	public enum PlayerStateType
 	{
-		protected PlayerController Player { get; }
-		
-		[Inject]
-		protected IInputManager InputManager { get; }
-
+		Idle,
+		Run,
+		Jump,
+		Shoot
+	}
+	
+	public class PlayerState: UnitState<PlayerController>
+	{
 		[Inject]
 		protected PlayerConfig Config { get; }
 
-		public PlayerState(string name, PlayerController player) : base(name)
+		public PlayerState(PlayerStateType state, PlayerController player) : base(state.ToString(), player)
 		{
-			Player = player;
 		}
 	}
 }

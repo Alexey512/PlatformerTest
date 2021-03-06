@@ -7,13 +7,11 @@ using UnityEngine;
 
 namespace Assets.Scrips.Common.FSM
 {
-	public class StateMachine
+	public class StateMachine: IStateMachine
 	{
 		private State _initialState;
 
 		private readonly Stack<State> _statesStack = new Stack<State>();
-
-		//TODO: States Stack
 
 		private readonly Dictionary<string, State> _states = new Dictionary<string, State>();
 
@@ -30,6 +28,11 @@ namespace Assets.Scrips.Common.FSM
 		public void SetInitialState(string stateName)
 		{
 			_initialState = GetState(stateName);
+		}
+
+		public void SetInitialState<T>(T value) where T: struct
+		{
+			SetInitialState(value.ToString());
 		}
 
 		public void HandleEvent(Event e)
@@ -50,6 +53,21 @@ namespace Assets.Scrips.Common.FSM
 			state.Owner = this;
 			_states[state.Name] = state;
 			return state;
+		}
+
+		public State AddState<T>(IEnumerable<object> args) where T : State
+		{
+			throw new NotImplementedException();
+		}
+
+		public State AddState<T>() where T : State
+		{
+			throw new NotImplementedException();
+		}
+
+		public void SwitchState<T>(T value) where T: struct
+		{
+			SwitchState(value.ToString());
 		}
 
 		public void SwitchState(string name)

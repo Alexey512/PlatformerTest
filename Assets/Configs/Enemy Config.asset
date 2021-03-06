@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0b7987dbbcaac248bc5c20e2ec33bd9, type: 3}
-  m_Name: PlayerConfig
+  m_Script: {fileID: 11500000, guid: 8473c71cbc7580b43b57663323e467fc, type: 3}
+  m_Name: Enemy Config
   m_EditorClassIdentifier: 
-  MinSpeed: 2
-  MaxSpeed: 5
-  Speed: 3
-  JumpHeight: 6.5
-  MaxHealth: 100
+  MinSpeed: 1
+  MaxSpeed: 3
+  MinHealth: 30
+  MaxHealth: 70
+  MinSpawnInterval: 3
+  MaxSpawnInterval: 7

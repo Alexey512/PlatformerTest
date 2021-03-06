@@ -10,13 +10,13 @@ namespace Assets.Scrips.Game.Player
 {
 	public class IdleState: PlayerState
 	{
-		public IdleState(PlayerController owner) : base("Idle", owner)
+		public IdleState(PlayerController owner) : base(PlayerStateType.Idle, owner)
 		{
 		}
 
 		public override void Enter(State prevState)
 		{
-			Owner.SwitchState("Run");
+			Owner.SwitchState(PlayerStateType.Run);
 		}
 
 		public override void Update()

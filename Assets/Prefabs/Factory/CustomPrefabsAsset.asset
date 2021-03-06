@@ -19,3 +19,6 @@ MonoBehaviour:
   - Id: Player
     Prefab: {fileID: 2153044437303296229, guid: 1ffda09b383320344bdf901f7387ddc2,
       type: 3}
+  - Id: Enemy
+    Prefab: {fileID: 5862405474630928420, guid: 97b08ca0dae78d546a4e586464fd53c2,
+      type: 3}

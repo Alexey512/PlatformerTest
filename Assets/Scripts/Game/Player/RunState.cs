@@ -11,34 +11,35 @@ namespace Assets.Scrips.Game.Player
 {
 	public class RunState: PlayerState
 	{
-		public RunState(PlayerController owner) : base("Run", owner)
+		public RunState(PlayerController owner) : base(PlayerStateType.Run, owner)
 		{
 		}
 
 		public override void Update()
 		{
-			var velocity = Player.Owner.Velocity;
+			var kinematicObject = Unit.Owner;
+			var velocity = kinematicObject.Velocity;
 			
 			if (InputManager.GetKey(KeyCode.RightArrow))
 			{
 				velocity.x = Config.MaxSpeed;
-				Player.Owner.Velocity = velocity;
+				kinematicObject.Velocity = velocity;
 			}
 			else if (InputManager.GetKey(KeyCode.LeftArrow))
 			{
 				velocity.x = Config.MinSpeed;
-				Player.Owner.Velocity = velocity;
+				kinematicObject.Velocity = velocity;
 			}
 			else
 			{
 				velocity.x = Config.Speed;
-				Player.Owner.Velocity = velocity;
+				kinematicObject.Velocity = velocity;
 			}
 
 			if (InputManager.GetKey(KeyCode.UpArrow))
 			{
 				//Owner.HandleEvent(new Event { Id = "Jump" });
-				Owner.SwitchState("Jump");
+				Owner.SwitchState(PlayerStateType.Jump);
 			}
 		}
 	}

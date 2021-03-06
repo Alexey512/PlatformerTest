@@ -12,6 +12,14 @@ namespace Assets.Scrips.Common.FSM
 
 		void SetInitialState(string stateName);
 
+		void SetInitialState<T>(T value) where T : struct;
+
+		void SwitchState(string name);
+
+		void SwitchState<T>(T value) where T : struct;
+
+		void PopState();
+
 		void HandleEvent(Event e);
 
 		State AddState(State state);		

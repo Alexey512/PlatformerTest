@@ -10,6 +10,7 @@ using Assets.Scrips.Game.Scenes;
 using Assets.Scripts.Common.UI;
 using Assets.Scripts.Game.Player;
 using Assets.Scripts.Game.Track;
+using Assets.Scripts.Game.Units.Enemy;
 using UnityEngine;
 using Zenject;
 
@@ -19,7 +20,10 @@ namespace Assets.Scrips
 	{
 		[SerializeField]
 		private PlayerConfig _playerConfig;
-		
+
+		[SerializeField]
+		private EnemyConfig _enemyConfig;
+
 		[SerializeField]
 		private WindowRoot _windowRoot;
 
@@ -41,11 +45,13 @@ namespace Assets.Scrips
 		public override void InstallBindings()
 		{
 			Container.Bind<PlayerConfig>().FromInstance(_playerConfig);
-			
+			Container.Bind<EnemyConfig>().FromInstance(_enemyConfig);
+
 			Container.Bind<StateMachineFactory>().AsSingle();
 
 			Container.Bind<PlayerCamera>().FromComponentInHierarchy().AsSingle();
 			Container.Bind<TrackManager>().FromComponentInHierarchy().AsSingle();
+			Container.Bind<EnemySpawner>().FromComponentInHierarchy().AsSingle();
 
 			Container.Bind<IInputManager>().To<InputManager>().FromNewComponentOnRoot().AsSingle();
 
