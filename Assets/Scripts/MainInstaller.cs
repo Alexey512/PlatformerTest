@@ -9,6 +9,7 @@ using Assets.Scrips.Game.Player;
 using Assets.Scrips.Game.Scenes;
 using Assets.Scripts.Common.UI;
 using Assets.Scripts.Game.Player;
+using Assets.Scripts.Game.Track;
 using UnityEngine;
 using Zenject;
 
@@ -42,6 +43,9 @@ namespace Assets.Scrips
 			Container.Bind<PlayerConfig>().FromInstance(_playerConfig);
 			
 			Container.Bind<StateMachineFactory>().AsSingle();
+
+			Container.Bind<PlayerCamera>().FromComponentInHierarchy().AsSingle();
+			Container.Bind<TrackManager>().FromComponentInHierarchy().AsSingle();
 
 			Container.Bind<IInputManager>().To<InputManager>().FromNewComponentOnRoot().AsSingle();
 

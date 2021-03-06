@@ -18,6 +18,17 @@ namespace Assets.Scrips.Game.Player
 
 		public Vector2 MoveForce { get; set; }
 
+		public Vector2 Position
+		{
+			get => View != null ? View.transform.position : Vector3.zero;
+			set
+			{
+				if (View != null)
+				{
+					View.transform.position = value;
+				}
+			}
+		}
 
 		private IStateMachine _fsm;
 
