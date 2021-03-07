@@ -44,6 +44,8 @@ namespace Assets.Scripts.Game.Units.Enemy
 			{
 				enemy.transform.position = _trackManager.GetEnemySpawnPosition();
 				
+				enemy.ResetParams();
+
 				enemy.Death += OnEnemyDeath;
 
 				_enemies.Add(enemy);

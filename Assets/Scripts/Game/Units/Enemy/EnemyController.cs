@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Assets.Scrips.Common.FSM;
 using Assets.Scripts.Game.Player;
 using Assets.Scripts.Game.Units.Bullet;
+using TMPro;
+using UnityEngine;
 using Zenject;
 using EventArgs = Assets.Scrips.Common.FSM.EventArgs;
 using Random = UnityEngine.Random;
@@ -19,16 +21,26 @@ namespace Assets.Scripts.Game.Units.Enemy
 		[Inject]
 		private EnemyConfig _config;
 
-		protected override void OnInitialize()
+		[SerializeField]
+		private TextMeshPro _halthLabel;
+
+		public void ResetParams()
 		{
 			Model.Health = Random.Range(_config.MinHealth, _config.MaxHealth);
 			Model.Damage = Random.Range(_config.MinDamage, _config.MaxDamage);
+		}
+
+		protected override void OnInitialize()
+		{
+			ResetParams();
 
 			Owner.UnitCollision += UnitCollision;
 
 			StateMachine.AddState<MoveState>(new []{ this });
 			StateMachine.AddState<DamageState>(new []{ this });
 			StateMachine.AddState<DeathState>(new []{ this });
+
+			StateMachine.AddTransition(EnemyStateType.Damage, EnemyEventType.Damage);
 
 			StateMachine.SetInitialState(EnemyStateType.Move);
 		}
@@ -43,7 +55,7 @@ namespace Assets.Scripts.Game.Units.Enemy
 
 		private void UnitCollision(IUnit unit)
 		{
-			var bullet = unit.GetModel<BulletModel>();
+   			var bullet = unit.GetModel<BulletModel>();
 			if (bullet != null)
 			{
 				var data = new EventArgs();
@@ -61,5 +73,19 @@ namespace Assets.Scripts.Game.Units.Enemy
 			}
 		}
 
+		private void UpdateHealth()
+		{
+			if (_halthLabel == null)
+			{
+				return;
+			}
+
+			_halthLabel.text = $"{Mathf.FloorToInt(Model.Health)}";
+		}
+
+		protected override void OnUpdate()
+		{
+			UpdateHealth();
+		}
 	}
 }
