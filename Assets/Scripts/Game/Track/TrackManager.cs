@@ -61,6 +61,7 @@ namespace Assets.Scripts.Game.Track
 
 		public void Clear()
 		{
+			_chunksPool.Clear();
 			transform.RemoveAllChildren();
 		}
 

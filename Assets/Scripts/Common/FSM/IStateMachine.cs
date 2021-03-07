@@ -8,6 +8,8 @@ namespace Assets.Scrips.Common.FSM
 {
 	public interface IStateMachine
 	{
+		event Action<State, State> ChangeState; 
+		
 		void Start();
 
 		void SetInitialState(string stateName);

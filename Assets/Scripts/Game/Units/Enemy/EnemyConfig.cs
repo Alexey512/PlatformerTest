@@ -10,6 +10,10 @@ namespace Assets.Scripts.Game.Units.Enemy
 	[CreateAssetMenu(menuName = "Game/Enemy config")]
 	public class EnemyConfig: ScriptableObject
 	{
+		public float MinDamage = 3f;
+
+		public float MaxDamage = 10f;
+
 		public float MinSpeed = 1;
 
 		public float MaxSpeed = 3;

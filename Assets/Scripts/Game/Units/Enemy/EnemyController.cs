@@ -19,6 +19,7 @@ namespace Assets.Scripts.Game.Units.Enemy
 		protected override void OnInitialize()
 		{
 			Model.Health = Random.Range(_config.MinHealth, _config.MaxHealth);
+			Model.Damage = Random.Range(_config.MinDamage, _config.MaxDamage);
 
 			Owner.UnitCollision += UnitCollision;
 

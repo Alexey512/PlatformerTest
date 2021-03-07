@@ -48,6 +48,12 @@ namespace Assets.Scrips.Game.Scenes
 		public override void Enter(State prevState, EventArgs args)
 		{
 			_player = _prefabsFactory.Create<PlayerController>("Player", _visualRoot.Root);
+			if (_player == null)
+			{
+				return;
+			}
+
+			_player.Death += OnPlayerDeath;
 
 			_player.Owner.Position = _trackManager.GetSpawnPosition();
 
@@ -59,10 +65,17 @@ namespace Assets.Scrips.Game.Scenes
 			_player.StartMove();
 		}
 
+		private void OnPlayerDeath()
+		{
+			Owner.PopState();
+		}
+
 		public override void Exit(State nextState)
 		{
 			if (_player)
 			{
+				_player.Death -= OnPlayerDeath;
+
 				_prefabsFactory.Remove(_player.gameObject, true);
 				_player = null;
 			}

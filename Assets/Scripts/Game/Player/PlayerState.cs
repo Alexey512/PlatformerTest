@@ -17,13 +17,15 @@ namespace Assets.Scrips.Game.Player
 		Run,
 		Jump,
 		Damage,
-		Shoot
+		Shoot,
+		Death
 	}
 
 	public enum PlayerEventType
 	{
 		Damage,
-		Shoot
+		Shoot,
+		Death
 	}
 
 	public class PlayerState: UnitState<PlayerController, PlayerModel>

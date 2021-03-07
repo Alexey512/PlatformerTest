@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8473c71cbc7580b43b57663323e467fc, type: 3}
   m_Name: Enemy Config
   m_EditorClassIdentifier: 
+  MinDamage: 3
+  MaxDamage: 10
   MinSpeed: 1
   MaxSpeed: 3
   MinHealth: 30
   MaxHealth: 70
-  MinSpawnInterval: 3
-  MaxSpawnInterval: 7
+  MinSpawnInterval: 0.5
+  MaxSpawnInterval: 1

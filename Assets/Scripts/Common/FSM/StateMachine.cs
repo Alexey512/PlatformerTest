@@ -9,6 +9,8 @@ namespace Assets.Scrips.Common.FSM
 {
 	public class StateMachine: IStateMachine
 	{
+		public event Action<State, State> ChangeState; 
+		
 		private State _initialState;
 
 		private readonly Stack<State> _statesStack = new Stack<State>();
@@ -191,6 +193,8 @@ namespace Assets.Scrips.Common.FSM
 
 			_statesStack.Push(nextState);
 			nextState.Enter(currState, args);
+
+			ChangeState?.Invoke(nextState, currState);
 		}
 	}
 }
