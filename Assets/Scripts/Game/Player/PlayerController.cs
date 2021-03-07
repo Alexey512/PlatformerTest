@@ -41,7 +41,7 @@ namespace Assets.Scrips.Game.Player
 			StateMachine.ChangeState += OnChangeState;
 
 			StateMachine.AddState<IdleState>(new []{ this });
-			StateMachine.AddState<RunState>(new []{ this });
+			StateMachine.AddState<RunState>(new []{ this }).AddTransition(PlayerStateType.Jump, PlayerEventType.Jump);
 			StateMachine.AddState<JumpState>(new []{ this });
 			StateMachine.AddState<DamageState>(new []{ this });
 			StateMachine.AddState<ShootState>(new []{ this });

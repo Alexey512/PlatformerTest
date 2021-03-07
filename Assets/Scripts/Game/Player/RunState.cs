@@ -38,8 +38,7 @@ namespace Assets.Scrips.Game.Player
 
 			if (InputManager.GetKey(KeyCode.UpArrow))
 			{
-				//Owner.HandleEvent(new Event { Id = "Jump" });
-				Owner.SwitchState(PlayerStateType.Jump);
+				Owner.HandleEvent(PlayerEventType.Jump);
 			}
 		}
 	}

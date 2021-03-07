@@ -23,6 +23,7 @@ namespace Assets.Scrips.Game.Player
 
 	public enum PlayerEventType
 	{
+		Jump,
 		Damage,
 		Shoot,
 		Death
