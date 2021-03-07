@@ -45,6 +45,11 @@ namespace Assets.Scripts.Game.Units.Enemy
 			StateMachine.SetInitialState(EnemyStateType.Move);
 		}
 
+		protected override void OnUpdate()
+		{
+			UpdateHealth();
+		}
+
 		private void ResetParams()
 		{
 			if (_config == null)
@@ -95,9 +100,5 @@ namespace Assets.Scripts.Game.Units.Enemy
 			_halthLabel.gameObject.SetActive(Model.Health > 0);
 		}
 
-		protected override void OnUpdate()
-		{
-			UpdateHealth();
-		}
 	}
 }

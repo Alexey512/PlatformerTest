@@ -1,26 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Assets.Scrips.Common.Actions
 {
 	public sealed class SequenceAction: CompositeAction
 	{
 		private IAction _currentAction;
-		
-		protected override void OnExecute()
-		{
-			if (!NextAction())
-			{
-				Status = ActionStatus.Finished;
-			}
-			else
-			{
-				Status = ActionStatus.Active;
-			}
-		}
 
 		public override void Update()
 		{
@@ -37,6 +20,19 @@ namespace Assets.Scrips.Common.Actions
 				}
 			}
 		}
+
+		protected override void OnExecute()
+		{
+			if (!NextAction())
+			{
+				Status = ActionStatus.Finished;
+			}
+			else
+			{
+				Status = ActionStatus.Active;
+			}
+		}
+
 
 		private bool NextAction()
 		{

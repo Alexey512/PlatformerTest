@@ -9,14 +9,15 @@ namespace Assets.Scrips.Common.Storage
 {
 	public class AddressableScriptableObject<T>: IAddressableScriptableObject where T: ScriptableObject
 	{
-		[SerializeField]
-		private AssetReference _asset;
-
 		public float Progress => _handle.PercentComplete;
 
 		public bool IsComplete => _handle.IsDone;
 
 		public T Data => _data;
+		
+
+		[SerializeField]
+		private AssetReference _asset;
 
 		private T _data;
 
@@ -42,31 +43,5 @@ namespace Assets.Scrips.Common.Storage
 				_data = _handle.Result;
 			}
 		}
-
-		/*
-		public IEnumerator Initialize(AssetReference assetRef, Action<float> progressCallback = null, Action completeCallback = null)
-		{
-			_progress = 0f;
-			
-			var handle = assetRef.LoadAssetAsync<T>();
-			yield return null;
- 
-			while (!handle.IsDone)
-			{
-				_progress = handle.PercentComplete;
-				progressCallback?.Invoke(handle.PercentComplete);
-				
-				yield return null;
-			}
-
-			if (handle.Status == AsyncOperationStatus.Succeeded)
-			{
-				_progress = 1f;
-				_container.Inject(handle.Result);
-				Owner = handle.Result;
-			}
-
-			completeCallback?.Invoke();
-		}*/
 	}
 }

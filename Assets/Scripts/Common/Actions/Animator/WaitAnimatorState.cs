@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Assets.Scrips.Common.Actions.Animator
+﻿namespace Assets.Scrips.Common.Actions.Animator
 {
 	public class WaitAnimatorState: BaseAction
 	{
@@ -17,20 +11,11 @@ namespace Assets.Scrips.Common.Actions.Animator
 			_animator = animator;
 			_tagName = tagName;
 		}
-
-		private void CheckState()
+		public override void Update()
 		{
-			if (_animator == null)
-				return;
-
-			if (_animator.GetCurrentAnimatorStateInfo(0).IsTag(_tagName))
-			//var transitionInfo = _animator.GetAnimatorTransitionInfo(0);
-			//if (transitionInfo.IsName(_tagName))
-			{
-				Status = ActionStatus.Finished;
-			}
+			CheckState();
 		}
-
+		
 		protected override void OnExecute()
 		{
 			if (_animator == null)
@@ -42,9 +27,15 @@ namespace Assets.Scrips.Common.Actions.Animator
 			CheckState();
 		}
 
-		public override void Update()
+		private void CheckState()
 		{
-			CheckState();
+			if (_animator == null)
+				return;
+
+			if (_animator.GetCurrentAnimatorStateInfo(0).IsTag(_tagName))
+			{
+				Status = ActionStatus.Finished;
+			}
 		}
 	}
 }

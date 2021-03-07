@@ -31,7 +31,5 @@ namespace Assets.Scrips.Common.Visual
 			var item = _sprites.FirstOrDefault(s => s.Id == id);
 			return item?.Resource;
 		}
-
-		
 	}
 }

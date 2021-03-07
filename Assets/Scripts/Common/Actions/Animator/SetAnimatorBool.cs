@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace Assets.Scrips.Common.Actions.Animator
+﻿namespace Assets.Scrips.Common.Actions.Animator
 {
 	public class SetAnimatorBool: BaseAction
 	{

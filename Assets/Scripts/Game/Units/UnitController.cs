@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Assets.Scrips.Common.FSM;
-using Assets.Scrips.Game.Player;
 using UnityEngine;
 using Zenject;
 
@@ -24,6 +19,11 @@ namespace Assets.Scripts.Game.Units
 		public void StartMove()
 		{
 			StateMachine?.Start();
+		}
+
+		public T GetModel<T>() where T : UnitModel
+		{
+			return Model as T;
 		}
 
 		protected virtual void OnInitialize()
@@ -49,9 +49,5 @@ namespace Assets.Scripts.Game.Units
 			OnUpdate();
 		}
 
-		public T GetModel<T>() where T : UnitModel
-		{
-			return Model as T;
-		}
 	}
 }

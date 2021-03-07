@@ -1,7 +1,4 @@
-﻿using System;
-using UnityEngine;
-using System.Collections.Generic;
-using System.Linq;
+﻿using UnityEngine;
 using DG.Tweening;
 
 namespace Assets.Scrips.Common.Actions

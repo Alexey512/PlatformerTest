@@ -28,30 +28,6 @@ namespace Assets.Scrips.Common.Actions
 			_duration = duration;
 		}
 
-		protected override void OnExecute()
-		{
-			var effObj = _factory.Create(_effectId);
-			if (effObj == null)
-			{
-				Status = ActionStatus.Finished;
-				return;
-			}
-
-			effObj.transform.parent = _owner;
-			effObj.transform.position = _position;
-
-			_particle = effObj.GetComponent<ParticleSystem>();
-			if (_particle == null)
-			{
-				Status = ActionStatus.Finished;
-				return;
-			}
-
-			_leftTime = _duration;
-
-			Status = ActionStatus.Active;
-		}
-
 		public override void Update()
 		{
 			if (_particle == null)
@@ -75,6 +51,30 @@ namespace Assets.Scrips.Common.Actions
 				_particle = null;
 				Status = ActionStatus.Finished;
 			}
+		}
+
+		protected override void OnExecute()
+		{
+			var effObj = _factory.Create(_effectId);
+			if (effObj == null)
+			{
+				Status = ActionStatus.Finished;
+				return;
+			}
+
+			effObj.transform.parent = _owner;
+			effObj.transform.position = _position;
+
+			_particle = effObj.GetComponent<ParticleSystem>();
+			if (_particle == null)
+			{
+				Status = ActionStatus.Finished;
+				return;
+			}
+
+			_leftTime = _duration;
+
+			Status = ActionStatus.Active;
 		}
 	}
 }

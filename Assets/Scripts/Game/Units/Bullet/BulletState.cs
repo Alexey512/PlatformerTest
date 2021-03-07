@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Assets.Scripts.Game.Units.Enemy;
-using Zenject;
+﻿using Zenject;
 
 namespace Assets.Scripts.Game.Units.Bullet
 {
@@ -23,7 +17,7 @@ namespace Assets.Scripts.Game.Units.Bullet
 	{
 		[Inject]
 		protected BulletConfig Config { get; }
-
+		
 		public BulletState(BulletStateType state, BulletController unit) : base(state.ToString(), unit)
 		{
 		}

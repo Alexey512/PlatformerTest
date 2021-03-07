@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace Assets.Scrips.Common.Storage
 {
-
 	public interface IDataStorage
 	{
 		void Load(Action complete = null);

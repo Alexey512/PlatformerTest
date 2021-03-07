@@ -105,9 +105,6 @@ namespace Assets.Scripts.Game.Units
 			}
 
 			_body.velocity = _velocity;
-
-			Debug.DrawLine(groundCheckPos, groundCheckPos - new Vector3(0, colliderRadius, 0), IsGrounded ? Color.green : Color.red);
-			Debug.DrawLine(groundCheckPos, groundCheckPos - new Vector3(colliderRadius, 0, 0), IsGrounded ? Color.green : Color.red);
 		}
 	}
 }

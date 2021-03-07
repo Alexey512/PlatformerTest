@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using UnityEngine.AddressableAssets;
-
+﻿
 namespace Assets.Scrips.Common.Storage
 {
 	public interface IAddressableScriptableObject

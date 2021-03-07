@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Assets.Scrips.Common.FSM;
 using Assets.Scrips.Common.Visual;
 using Assets.Scrips.Game.Player;
 using Assets.Scripts.Game.Player;
-using Assets.Scripts.Game.Scenes;
 using Assets.Scripts.Game.Track;
 using Assets.Scripts.Game.Units.Enemy;
 using UnityEngine;
@@ -66,14 +61,7 @@ namespace Assets.Scrips.Game.Scenes
 
 			_player.StartMove();
 		}
-
-		private void OnPlayerDeath()
-		{
-			_prefabsFactory.Remove(_player.gameObject, true);
-			
-			Owner.PopState();
-		}
-
+		
 		public override void Exit(State nextState)
 		{
 			if (_player)
@@ -106,6 +94,13 @@ namespace Assets.Scrips.Game.Scenes
 					enemy.StartMove();
 				}
 			}
+		}
+
+		private void OnPlayerDeath()
+		{
+			_prefabsFactory.Remove(_player.gameObject, true);
+			
+			Owner.PopState();
 		}
 	}
 }

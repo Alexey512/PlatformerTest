@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Assets.Scrips.Common.FSM;
+﻿using Assets.Scrips.Common.FSM;
 using Assets.Scrips.Game.UI;
 using Assets.Scripts.Common.UI;
 using Zenject;
@@ -15,8 +10,6 @@ namespace Assets.Scrips.Game.Scenes
 	{
 		[Inject]
 		private IUIManager _uiManager;
-
-		private MainMenuController _mainMenu;
 
 		public MainMenuState() : base("MainMenu")
 		{
@@ -30,15 +23,6 @@ namespace Assets.Scrips.Game.Scenes
 				mainMenu.Close();
 				Owner.SwitchState("Game");
 			});
-		}
-
-		public override void Exit(State nextState)
-		{
-		}
-
-		public override void Update()
-		{
-			//throw new NotImplementedException();
 		}
 	}
 }

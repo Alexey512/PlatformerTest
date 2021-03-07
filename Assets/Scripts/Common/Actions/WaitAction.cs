@@ -1,7 +1,4 @@
-﻿using System;
-using UnityEngine;
-using System.Collections.Generic;
-using System.Linq;
+﻿using UnityEngine;
 
 namespace Assets.Scrips.Common.Actions
 {
@@ -16,12 +13,6 @@ namespace Assets.Scrips.Common.Actions
 			_delay = delay;
 		}
 
-		protected override void OnExecute()
-		{
-			_leftTime = _delay;
-			Status = ActionStatus.Active;
-		}
-
 		public override void Update()
 		{
 			if (Status != ActionStatus.Active)
@@ -32,6 +23,12 @@ namespace Assets.Scrips.Common.Actions
 			{
 				Status = ActionStatus.Finished;
 			}
+		}
+
+		protected override void OnExecute()
+		{
+			_leftTime = _delay;
+			Status = ActionStatus.Active;
 		}
 	}
 }

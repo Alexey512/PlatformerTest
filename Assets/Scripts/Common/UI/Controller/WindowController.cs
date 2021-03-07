@@ -20,7 +20,7 @@ namespace Assets.Scripts.Common.UI.Controller
         protected IAction HideAction;
 
         [Inject]
-        protected void Construct(IUIManager uiManager, IActionsSequencer sequencer)
+        public void Construct(IUIManager uiManager, IActionsSequencer sequencer)
         {
             Manager = uiManager;
             ActionsSequencer = sequencer;
@@ -62,6 +62,26 @@ namespace Assets.Scripts.Common.UI.Controller
 	        }			
         }
 
+		protected virtual void OnInit()
+		{
+
+		}
+
+		protected virtual void OnOpen()
+		{
+
+		}
+
+		protected virtual void OnClose()
+		{
+
+		}
+
+		protected virtual void OnUpdate()
+		{
+
+		}
+
 		private void CloseImpl(Action<IWindowController> callback = null)
 		{
 			gameObject.SetActive(false);
@@ -74,25 +94,5 @@ namespace Assets.Scripts.Common.UI.Controller
 		{
 			OnUpdate();
 		}
-
-		protected virtual void OnInit()
-		{
-
-		}
-
-        protected virtual void OnOpen()
-        {
-
-        }
-
-        protected virtual void OnClose()
-        {
-
-        }
-
-        protected virtual void OnUpdate()
-        {
-
-        }
     }
 }

@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Assets.Scrips.Common.FSM;
 using Assets.Scrips.Common.InputSystem;
-using Assets.Scripts.Common.Visual;
 using Assets.Scripts.Game.Player;
 using Assets.Scripts.Game.Units;
 using UnityEngine;
@@ -42,7 +37,7 @@ namespace Assets.Scrips.Game.Player
 
 		protected override void OnInitialize()
 		{
-			_weaponController = new WeaponController(_config);
+			_weaponController = new WeaponController(_config, StateMachine);
 
 			ResetParams();
 
@@ -60,11 +55,15 @@ namespace Assets.Scrips.Game.Player
 			StateMachine.AddState<ShootState>(new []{ this });
 			StateMachine.AddState<DeathState>(new []{ this });
 
-			//StateMachine.AddTransition(PlayerStateType.Damage, PlayerEventType.Damage);
 			StateMachine.AddTransition(PlayerStateType.Shoot, PlayerEventType.Shoot);
 			StateMachine.AddTransition(PlayerStateType.Death, PlayerEventType.Death);
 
 			StateMachine.SetInitialState(PlayerStateType.Run);
+		}
+
+		protected override void OnUpdate()
+		{
+			UpdateWeapon();
 		}
 
 		private void OnChangeState(State state, State prevState)
@@ -100,16 +99,8 @@ namespace Assets.Scrips.Game.Player
 			
 			if (_inputManager.GetKey(KeyCode.Space))
 			{
-				if (_weaponController.TryShoot())
-				{
-					StateMachine.HandleEvent(PlayerEventType.Shoot);
-				}
+				_weaponController.TryShoot();
 			}
-		}
-
-		protected override void OnUpdate()
-		{
-			UpdateWeapon();
 		}
 	}
 }

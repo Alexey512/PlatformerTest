@@ -42,10 +42,7 @@ namespace Assets.Scripts.Common.UI
 			}
 			else if (window.Mode == WindowMode.Modal)
 			{
-				if (_modalWindow != null)
-				{
-					_modalWindow.Close();
-				}
+				_modalWindow?.Close();
 				_modalWindow = window;
 				window.Open();
 			}
@@ -79,9 +76,6 @@ namespace Assets.Scripts.Common.UI
 			{
 				_modalWindow = null;
 			}
-
-			//TODO: stackowerflow
-			//window.Close();
 
 			_factory.Remove(window);
 

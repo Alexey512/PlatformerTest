@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Assets.Scrips.Common.Storage;
-using Assets.Scripts.Common.UI;
 using Assets.Scripts.Common.UI.Controller;
 using OneLine;
 using UnityEngine;

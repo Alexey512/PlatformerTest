@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Assets.Scrips.Common.Utils;
-using JetBrains.Annotations;
-using TMPro.EditorUtilities;
 using UnityEngine;
 
 namespace Assets.Scripts.Game.Track
@@ -13,31 +7,6 @@ namespace Assets.Scripts.Game.Track
 	[ExecuteInEditMode]
 	public class TrackManager: MonoBehaviour
 	{
-		public Vector3 GetSpawnPosition()
-		{
-			return _spawnMarker != null ? _spawnMarker.transform.position : Vector3.zero;
-		}
-
-		public Vector3 GetEnemySpawnPosition()
-		{
-			return new Vector3(_chunksRect.xMax + _spawnOffset / 2, _chunksRect.yMax);
-		}
-
-		public void SetCamera(Camera camera)
-		{
-			_camera = camera;
-		}
-
-		public bool IsActive
-		{
-			get => _active;
-			set
-			{
-				_active = value;
-				UpdateChunks();
-			}
-		}
-
 		[SerializeField]
 		private Transform _spawnMarker;
 
@@ -58,6 +27,31 @@ namespace Assets.Scripts.Game.Track
 		private Rect _chunksRect;
 
 		private int _visibleChunksCount;
+
+		public bool IsActive
+		{
+			get => _active;
+			set
+			{
+				_active = value;
+				UpdateChunks();
+			}
+		}
+
+		public Vector3 GetSpawnPosition()
+		{
+			return _spawnMarker != null ? _spawnMarker.transform.position : Vector3.zero;
+		}
+
+		public Vector3 GetEnemySpawnPosition()
+		{
+			return new Vector3(_chunksRect.xMax + _spawnOffset / 2, _chunksRect.yMax);
+		}
+
+		public void SetCamera(Camera camera)
+		{
+			_camera = camera;
+		}
 
 		public void Clear()
 		{
@@ -165,9 +159,6 @@ namespace Assets.Scripts.Game.Track
 			float halfHeight = _camera.orthographicSize;
 			float halfWidth = _camera.aspect * halfHeight;
 
-			float height = halfHeight * 2;
-			float width = halfWidth * 2;
-
 			Vector2 camPos = _camera.transform.position;
 
 			float camLeft = camPos.x - halfWidth;
@@ -199,9 +190,7 @@ namespace Assets.Scripts.Game.Track
 			{
 				var chunk = transform.GetChild(i).GetComponent<TrackChunk>();
 				if (chunk == null || !chunk.gameObject.activeSelf)
-				{
 					continue;
-				}
 				
 				var chunkRect = chunk.GetRect();
 
@@ -219,32 +208,6 @@ namespace Assets.Scripts.Game.Track
 			}
 
 			_chunksRect = _visibleChunksCount > 0 ? rect : Rect.zero;
-		}
-
-		private void OnDrawGizmos()
-		{
-			if (_camera == null)
-			{
-				return;
-			}
-
-			float halfHeight = _camera.orthographicSize;
-			float halfWidth = _camera.aspect * halfHeight;
-
-			float height = halfHeight * 2;
-			float width = halfWidth * 2;
-
-			Vector2 camPos = _camera.transform.position;
-
-			float camLeft = camPos.x - halfWidth;
-			float camRight = camPos.x + halfWidth;
-
-
-
-
-
-			Gizmos.color = Color.green;
-			Gizmos.DrawLine(_camera.rect.min, _camera.rect.max);
 		}
 	}
 }

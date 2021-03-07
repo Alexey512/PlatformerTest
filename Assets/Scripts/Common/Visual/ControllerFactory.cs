@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Assets.Scrips.Common.Utils;
+﻿using Assets.Scrips.Common.Utils;
 using Assets.Scrips.Common.Visual;
-using Assets.Scrips.Game.Player;
-using UnityEditor.IMGUI.Controls;
 using UnityEngine;
 using Zenject;
 

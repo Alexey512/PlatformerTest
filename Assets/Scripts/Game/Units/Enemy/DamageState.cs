@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Assets.Scrips.Common.FSM;
+﻿using Assets.Scrips.Common.FSM;
 
 namespace Assets.Scripts.Game.Units.Enemy
 {

@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Assets.Scrips.Common.Actions
 {
-
 	public class ExecuteWhileAction: BaseAction
 	{
 		private readonly Func<ActionStatus> _callback;
@@ -16,18 +11,18 @@ namespace Assets.Scrips.Common.Actions
 			_callback = callback;
 		}
 		
-		protected override void OnExecute()
+		public override void Update()
 		{
-			if (_callback == null)
+			var result = _callback?.Invoke();
+			if (result == ActionStatus.Finished)
 			{
 				Status = ActionStatus.Finished;
 			}
 		}
 
-		public override void Update()
+		protected override void OnExecute()
 		{
-			var result = _callback?.Invoke();
-			if (result == ActionStatus.Finished)
+			if (_callback == null)
 			{
 				Status = ActionStatus.Finished;
 			}

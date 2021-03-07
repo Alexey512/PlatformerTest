@@ -18,6 +18,12 @@ namespace Assets.Scrips.Common.Visual
 			public GameObject Prefab;
 		}
 
+		public float Progress => 1.0f;
+
+		public bool IsComplete => true;
+
+		public void Load() { }
+
 		[SerializeField, OneLine, HideLabel]
 		private List<PrefabItem> _Prefabs;
 
@@ -25,12 +31,6 @@ namespace Assets.Scrips.Common.Visual
 
         [Inject]
 		private DiContainer _container;
-
-		public float Progress => 1.0f;
-
-		public bool IsComplete => true;
-
-		public void Load() { }
 
 		public GameObject Create(string id, Transform parent = null)
 		{

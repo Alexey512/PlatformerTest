@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Assets.Scripts.Game.Units.Enemy
@@ -41,7 +39,7 @@ namespace Assets.Scripts.Game.Units.Enemy
 		public Config GetConfigs(string id)
 		{
 			var config = _configs.FirstOrDefault(c => c.Id == id);
-			return config != null ? config : _defaultConfig;
+			return config ?? _defaultConfig;
 		}
 	}
 }

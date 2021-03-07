@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Assets.Scrips.Common.FSM;
+﻿using Assets.Scrips.Common.FSM;
 using Assets.Scrips.Game.Player;
-using UnityEngine;
 using EventArgs = Assets.Scrips.Common.FSM.EventArgs;
 
 namespace Assets.Scripts.Game.Player
