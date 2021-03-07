@@ -18,4 +18,4 @@ MonoBehaviour:
   JumpHeight: 6.5
   MaxHealth: 1
   WeaponId: Bullet
-  RoF: 0.3
+  RoF: 0.5

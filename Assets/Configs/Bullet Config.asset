@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Bullet Config
   m_EditorClassIdentifier: 
   Speed: 10
-  Damage: 30
+  Damage: 20
