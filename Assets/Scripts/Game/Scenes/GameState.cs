@@ -34,7 +34,6 @@ namespace Assets.Scrips.Game.Scenes
 
 		private PlayerController _player;
 
-		private float _timeToSpawn;
 
 		public GameState() : base("Game")
 		{
@@ -80,20 +79,7 @@ namespace Assets.Scrips.Game.Scenes
 
 		public override void Update()
 		{
-			if (_timeToSpawn > 0)
-			{
-				_timeToSpawn -= Time.deltaTime;
-			}
-			else
-			{
-				_timeToSpawn = Random.Range(_enemyConfig.MinSpawnInterval, _enemyConfig.MaxSpawnInterval);
-
-				var enemy = _enemySpawner.SpawnEnemy();
-				if (enemy)
-				{
-					enemy.StartMove();
-				}
-			}
+			_enemySpawner.Update();
 		}
 
 		private void OnPlayerDeath()

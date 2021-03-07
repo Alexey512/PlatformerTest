@@ -22,6 +22,8 @@ namespace Assets.Scripts.Game.Units.Enemy
 		private List<EnemyController> _enemies = new List<EnemyController>();
 
 		private EnemyConfigs _config;
+		
+		private float _timeToSpawn;
 
 		[Inject]
 		private void Construct(IPrefabsFactory factory, VisualRoot visualRoot, TrackManager trackManager, EnemyConfigs config)
@@ -30,6 +32,8 @@ namespace Assets.Scripts.Game.Units.Enemy
 			_factory = factory;
 			_trackManager = trackManager;
 			_config = config;
+
+			ResetTime();
 		}
 
 		public EnemyController SpawnEnemy()
@@ -49,6 +53,8 @@ namespace Assets.Scripts.Game.Units.Enemy
 
 				enemy.Death += OnEnemyDeath;
 
+				enemy.StartMove();
+
 				_enemies.Add(enemy);
 			}
 
@@ -61,6 +67,25 @@ namespace Assets.Scripts.Game.Units.Enemy
 			{
 				_factory.Remove(enemy.gameObject, true);
 			}
+		}
+
+		public void Update()
+		{
+			if (_timeToSpawn > 0)
+			{
+				_timeToSpawn -= Time.deltaTime;
+			}
+			else
+			{
+				ResetTime();
+
+				SpawnEnemy();
+			}
+		}
+
+		private void ResetTime()
+		{
+			_timeToSpawn = Random.Range(_config.MinSpawnInterval, _config.MaxSpawnInterval);
 		}
 
 		private void OnEnemyDeath(EnemyController enemy)
