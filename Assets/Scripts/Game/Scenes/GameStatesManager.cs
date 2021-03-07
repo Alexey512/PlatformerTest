@@ -5,6 +5,10 @@ namespace Assets.Scrips.Game.Scenes
 {
 	public class GameStatesManager: ITickable
 	{
+		public static string LoaderState = "Loader";
+		public static string GameState = "Game";
+		public static string MainMenuState = "MainMenu";
+
 		private readonly IStateMachine _fsm;
 		
 		public GameStatesManager(StateMachineFactory sfm)

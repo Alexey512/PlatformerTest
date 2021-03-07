@@ -11,7 +11,7 @@ namespace Assets.Scrips.Game.Scenes
 		[Inject]
 		private IUIManager _uiManager;
 
-		public MainMenuState() : base("MainMenu")
+		public MainMenuState() : base(GameStatesManager.MainMenuState)
 		{
 		}
 
@@ -21,7 +21,7 @@ namespace Assets.Scrips.Game.Scenes
 			mainMenu.SetCallback(() =>
 			{
 				mainMenu.Close();
-				Owner.SwitchState("Game");
+				Owner.SwitchState(GameStatesManager.GameState);
 			});
 		}
 	}

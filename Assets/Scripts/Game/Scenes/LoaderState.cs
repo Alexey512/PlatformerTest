@@ -8,7 +8,7 @@ namespace Assets.Scrips.Game.Scenes
 	{
 		private readonly IPrefabsFactory _prefabsFactory;
 		
-		public LoaderState(IPrefabsFactory prefabsFactory) : base("Loader")
+		public LoaderState(IPrefabsFactory prefabsFactory) : base(GameStatesManager.LoaderState)
 		{
 			_prefabsFactory = prefabsFactory;
 		}
@@ -22,7 +22,7 @@ namespace Assets.Scrips.Game.Scenes
 		{
 			if (_prefabsFactory.IsComplete)
 			{
-				Owner.SwitchState("MainMenu");
+				Owner.SwitchState(GameStatesManager.MainMenuState);
 			}
 		}
 	}

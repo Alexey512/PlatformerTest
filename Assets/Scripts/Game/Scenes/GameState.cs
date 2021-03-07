@@ -29,13 +29,9 @@ namespace Assets.Scrips.Game.Scenes
 		[Inject]
 		private readonly EnemySpawner _enemySpawner;
 
-		[Inject]
-		private readonly EnemyConfigs _enemyConfig;
-
 		private PlayerController _player;
 
-
-		public GameState() : base("Game")
+		public GameState() : base(GameStatesManager.GameState)
 		{
 		}
 
