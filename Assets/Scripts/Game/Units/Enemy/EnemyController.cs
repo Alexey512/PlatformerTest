@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Assets.Scripts.Game.Player;
 using Assets.Scripts.Game.Units.Bullet;
 using UnityEngine;
 using Zenject;
@@ -12,7 +13,9 @@ namespace Assets.Scripts.Game.Units.Enemy
 	{
 		[Inject]
 		private EnemyConfig _config;
-		
+
+		private const float _limitHeight = -5;
+
 		protected override void OnInitialize()
 		{
 			Model.Health = Random.Range(_config.MinHealth, _config.MaxHealth);
@@ -32,7 +35,7 @@ namespace Assets.Scripts.Game.Units.Enemy
 			var bullet = unit.GetModel<BulletModel>();
 			if (bullet != null)
 			{
-				Model.Health -= bullet.Damage;
+ 				Model.Health -= bullet.Damage;
 				if (Model.Health <= 0)
 				{
 					StateMachine.HandleEvent(EnemyEventType.Damage);
@@ -43,5 +46,6 @@ namespace Assets.Scripts.Game.Units.Enemy
 				StateMachine.HandleEvent(EnemyEventType.Damage);
 			}
 		}
+
 	}
 }

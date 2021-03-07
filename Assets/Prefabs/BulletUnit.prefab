@@ -168,10 +168,10 @@ MonoBehaviour:
   _body: {fileID: 7762093743265148894}
   _ignoreLayers:
     serializedVersion: 2
-    m_Bits: 1280
+    m_Bits: 3072
   _ignoreCollide:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 3072
   _collider: {fileID: 7762093743265148927}
   _gravityScale: 1
 --- !u!114 &7394486873887543482

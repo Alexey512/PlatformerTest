@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Assets.Scripts.Game.Player;
+using Assets.Scripts.Game.Units.Enemy;
+using UnityEngine;
 using Zenject;
 
 namespace Assets.Scripts.Game.Units.Bullet
@@ -11,7 +14,10 @@ namespace Assets.Scripts.Game.Units.Bullet
 	{
 		[Inject]
 		private BulletConfig _config;
-		
+
+		[Inject]
+		private PlayerCamera _camera;
+
 		protected override void OnInitialize()
 		{
 			Model.Damage = _config.Damage;
@@ -29,6 +35,28 @@ namespace Assets.Scripts.Game.Units.Bullet
 		private void UnitCollision(IUnit unit)
 		{
 			StateMachine.HandleEvent(BulletEventType.Explosion);
+		}
+
+		
+		protected override void OnUpdate()
+		{
+			var camera = _camera.Camera;
+			if (camera == null)
+			{
+				return;
+			}
+
+			float halfHeight = camera.orthographicSize;
+			float halfWidth = camera.aspect * halfHeight;
+
+			Vector2 camPos = _camera.transform.position;
+
+			float camRight = camPos.x + halfWidth;
+
+			if (Owner.Position.x > camRight)
+			{
+				StateMachine.SwitchState(BulletStateType.Explosion);
+			}
 		}
 	}
 }

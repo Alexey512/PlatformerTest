@@ -16,13 +16,16 @@ namespace Assets.Scrips.Game.Player
 		[Inject]
 		private IPrefabsFactory _factory;
 
+		[Inject]
+		private VisualRoot _visualRoot; 
+
 		public ShootState(PlayerController player) : base(PlayerStateType.Shoot, player)
 		{
 		}
 
 		public override void Enter(State prevState, EventArgs args = null)
 		{
-			var bullet = _factory.Create<BulletController>(Config.WeaponId);
+			var bullet = _factory.Create<BulletController>(Config.WeaponId, _visualRoot.Root);
 			if (bullet != null)
 			{
 				bullet.StartMove();
