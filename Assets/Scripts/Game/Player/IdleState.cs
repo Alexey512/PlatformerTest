@@ -17,7 +17,6 @@ namespace Assets.Scrips.Game.Player
 
 		public override void Enter(State prevState, EventArgs args)
 		{
-			Owner.SwitchState(PlayerStateType.Run);
 		}
 
 		public override void Update()

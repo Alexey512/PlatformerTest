@@ -69,6 +69,8 @@ namespace Assets.Scrips.Game.Scenes
 
 		private void OnPlayerDeath()
 		{
+			_prefabsFactory.Remove(_player.gameObject, true);
+			
 			Owner.PopState();
 		}
 

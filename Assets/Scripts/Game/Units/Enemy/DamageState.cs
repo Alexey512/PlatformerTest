@@ -22,6 +22,7 @@ namespace Assets.Scripts.Game.Units.Enemy
 				if (Unit.Model.Health <= 0)
 				{
 					Owner.SwitchState(EnemyStateType.Death);
+					return;
 				}
 			}
 

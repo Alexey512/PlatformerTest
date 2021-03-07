@@ -51,22 +51,25 @@ namespace Assets.Scrips.Game.Player
 			StateMachine.ChangeState += OnChangeState;
 
 			StateMachine.AddState<IdleState>(new []{ this });
-			StateMachine.AddState<RunState>(new []{ this }).AddTransition(PlayerStateType.Jump, PlayerEventType.Jump);
-			StateMachine.AddState<JumpState>(new []{ this });
+			StateMachine.AddState<RunState>(new []{ this })
+				.AddTransition(PlayerStateType.Jump, PlayerEventType.Jump)
+				.AddTransition(PlayerStateType.Damage, PlayerEventType.Damage);
+			StateMachine.AddState<JumpState>(new[] {this})
+				.AddTransition(PlayerStateType.Damage, PlayerEventType.Damage);
 			StateMachine.AddState<DamageState>(new []{ this });
 			StateMachine.AddState<ShootState>(new []{ this });
 			StateMachine.AddState<DeathState>(new []{ this });
 
-			StateMachine.AddTransition(PlayerStateType.Damage, PlayerEventType.Damage);
+			//StateMachine.AddTransition(PlayerStateType.Damage, PlayerEventType.Damage);
 			StateMachine.AddTransition(PlayerStateType.Shoot, PlayerEventType.Shoot);
 			StateMachine.AddTransition(PlayerStateType.Death, PlayerEventType.Death);
 
-			StateMachine.SetInitialState(PlayerStateType.Idle);
+			StateMachine.SetInitialState(PlayerStateType.Run);
 		}
 
 		private void OnChangeState(State state, State prevState)
 		{
-			if (state.Name == PlayerStateType.Death.ToString())
+			if (state.Name == PlayerStateType.Idle.ToString())
 			{
 				Death?.Invoke();
 			}

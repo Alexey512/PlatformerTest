@@ -26,6 +26,7 @@ namespace Assets.Scripts.Game.Player
 				if (Unit.Model.Health <= 0)
 				{
 					Owner.SwitchState(PlayerStateType.Death);
+					return;
 				}
 			}
 

@@ -20,14 +20,16 @@ namespace Assets.Scrips.Common.FSM
 			Name = name;
 		}
 
-		public void AddTransition(string targetState, string eventId, Func<EventArgs, bool> condition = null, Action<EventArgs> handler = null)
+		public State AddTransition(string targetState, string eventId, Func<EventArgs, bool> condition = null, Action<EventArgs> handler = null)
 		{
 			Transitions.Add(new Transition(targetState, eventId, condition, handler));
+			return this;
 		}
 
-		public void AddTransition<T, U>(T targetState, U eventType, Func<EventArgs, bool> condition = null, Action<EventArgs> handler = null) where T : struct where U : struct
+		public State AddTransition<T, U>(T targetState, U eventType, Func<EventArgs, bool> condition = null, Action<EventArgs> handler = null) where T : struct where U : struct
 		{
 			AddTransition(targetState.ToString(), eventType.ToString(), condition, handler);
+			return this;
 		}
 
 		public virtual void Enter(State prevState, EventArgs args = null) {}

@@ -92,6 +92,7 @@ namespace Assets.Scripts.Game.Units.Enemy
 			}
 
 			_halthLabel.text = $"{Mathf.FloorToInt(Model.Health)}";
+			_halthLabel.gameObject.SetActive(Model.Health > 0);
 		}
 
 		protected override void OnUpdate()

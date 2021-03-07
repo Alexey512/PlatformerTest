@@ -28,3 +28,5 @@ MonoBehaviour:
   - Id: Bullet
     Prefab: {fileID: 7762093743265148864, guid: f60bb96a24135f4428e1f602596deb25,
       type: 3}
+  - Id: Explosion
+    Prefab: {fileID: 1170567192047786, guid: dfbdf2134f769dc4486867bd0989e1f4, type: 3}

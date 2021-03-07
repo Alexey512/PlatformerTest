@@ -9,7 +9,7 @@ namespace Assets.Scrips.Common.FSM
 {
 	public class StateMachine: IStateMachine
 	{
-		public event Action<State, State> ChangeState; 
+		public event Action<State, State> ChangeState;
 		
 		private State _initialState;
 
