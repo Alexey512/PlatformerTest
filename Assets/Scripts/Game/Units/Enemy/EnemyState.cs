@@ -22,9 +22,6 @@ namespace Assets.Scripts.Game.Units.Enemy
 
 	public class EnemyState: UnitState<EnemyController, EnemyModel>
 	{
-		[Inject]
-		protected EnemyConfig Config { get; }
-
 		public EnemyState(EnemyStateType state, EnemyController unit) : base(state.ToString(), unit)
 		{
 		}

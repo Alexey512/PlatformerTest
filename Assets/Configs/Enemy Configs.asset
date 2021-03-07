@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: Enemy Configs
+  m_EditorClassIdentifier: Assembly-CSharp:Assets.Scripts.Game.Units.Enemy:EnemyConfigs
+  MinSpawnInterval: 0.5
+  MaxSpawnInterval: 2
+  _defaultConfig:
+    Id: 
+    MinDamage: 3
+    MaxDamage: 10
+    MinSpeed: 1
+    MaxSpeed: 3
+    MinHealth: 30
+    MaxHealth: 70
+  _configs:
+  - Id: enemy_0
+    MinDamage: 3
+    MaxDamage: 5
+    MinSpeed: 1
+    MaxSpeed: 2
+    MinHealth: 50
+    MaxHealth: 60
+  - Id: enemy_1
+    MinDamage: 7
+    MaxDamage: 8
+    MinSpeed: 2
+    MaxSpeed: 3
+    MinHealth: 30
+    MaxHealth: 40

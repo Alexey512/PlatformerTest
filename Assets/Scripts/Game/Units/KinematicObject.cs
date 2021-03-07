@@ -19,6 +19,9 @@ namespace Assets.Scripts.Game.Units
 		private LayerMask _ignoreLayers;
 
 		[SerializeField]
+		private LayerMask _groundLayers;
+
+		[SerializeField]
 		private LayerMask _ignoreCollide;
 
 		[SerializeField]
@@ -93,7 +96,7 @@ namespace Assets.Scripts.Game.Units
 			{
 				foreach (var intersect in intersectColliders)
 				{
-					if (intersect != _collider)
+					if (_groundLayers.HasLayer(intersect.gameObject.layer))
 					{
 						IsGrounded = true;
 						break;

@@ -35,7 +35,7 @@ namespace Assets.Scrips.Game.Scenes
 		private readonly EnemySpawner _enemySpawner;
 
 		[Inject]
-		private readonly EnemyConfig _enemyConfig;
+		private readonly EnemyConfigs _enemyConfig;
 
 		private PlayerController _player;
 

@@ -191,6 +191,9 @@ MonoBehaviour:
   _ignoreLayers:
     serializedVersion: 2
     m_Bits: 2304
+  _groundLayers:
+    serializedVersion: 2
+    m_Bits: 256
   _ignoreCollide:
     serializedVersion: 2
     m_Bits: 0

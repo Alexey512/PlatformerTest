@@ -24,12 +24,15 @@ namespace Assets.Scripts.Game.Units.Enemy
 
 		private List<EnemyController> _enemies = new List<EnemyController>();
 
+		private EnemyConfigs _config;
+
 		[Inject]
-		private void Construct(IPrefabsFactory factory, VisualRoot visualRoot, TrackManager trackManager)
+		private void Construct(IPrefabsFactory factory, VisualRoot visualRoot, TrackManager trackManager, EnemyConfigs config)
 		{
 			_visualRoot = visualRoot;
 			_factory = factory;
 			_trackManager = trackManager;
+			_config = config;
 		}
 
 		public EnemyController SpawnEnemy()
@@ -39,12 +42,13 @@ namespace Assets.Scripts.Game.Units.Enemy
 				return null;
 			}
 
-			var enemy = _factory.Create<EnemyController>(_prefabsIds[Random.Range(0, _prefabsIds.Count)], _visualRoot.Root);
+			string enemyId = _prefabsIds[Random.Range(0, _prefabsIds.Count)];
+			var enemy = _factory.Create<EnemyController>(enemyId, _visualRoot.Root);
 			if (enemy != null)
 			{
 				enemy.transform.position = _trackManager.GetEnemySpawnPosition();
 				
-				enemy.ResetParams();
+				enemy.SetConfig(_config.GetConfigs(enemyId));
 
 				enemy.Death += OnEnemyDeath;
 

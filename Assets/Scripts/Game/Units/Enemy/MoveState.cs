@@ -24,7 +24,7 @@ namespace Assets.Scripts.Game.Units.Enemy
 		public override void Enter(State prevState, EventArgs args)
 		{
 			var velocity = Unit.Owner.Velocity;
-			velocity.x = -Random.Range(Config.MinSpeed, Config.MaxSpeed);
+			velocity.x = -Random.Range(Unit.Config.MinSpeed, Unit.Config.MaxSpeed);
 			Unit.Owner.Velocity = velocity;
 		}
 

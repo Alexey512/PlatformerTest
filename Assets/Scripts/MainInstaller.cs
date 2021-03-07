@@ -4,7 +4,6 @@ using Assets.Scrips.Common.FSM;
 using Assets.Scrips.Common.InputSystem;
 using Assets.Scrips.Common.Storage;
 using Assets.Scrips.Common.Visual;
-using Assets.Scrips.Game.Config;
 using Assets.Scrips.Game.Player;
 using Assets.Scrips.Game.Scenes;
 using Assets.Scripts.Common.UI;
@@ -23,7 +22,7 @@ namespace Assets.Scrips
 		private PlayerConfig _playerConfig;
 
 		[SerializeField]
-		private EnemyConfig _enemyConfig;
+		private EnemyConfigs _enemyConfig;
 
 		[SerializeField]
 		private BulletConfig _bulletConfig;
@@ -33,9 +32,6 @@ namespace Assets.Scrips
 
 		[SerializeField]
 		private GameObject _visualRoot;
-
-		[SerializeField]
-		private TextAsset _gameConfig;
 
         [SerializeField]
         private VisualFactory _visualFactory;
@@ -49,7 +45,7 @@ namespace Assets.Scrips
 		public override void InstallBindings()
 		{
 			Container.Bind<PlayerConfig>().FromInstance(_playerConfig);
-			Container.Bind<EnemyConfig>().FromInstance(_enemyConfig);
+			Container.Bind<EnemyConfigs>().FromInstance(_enemyConfig);
 			Container.Bind<BulletConfig>().FromInstance(_bulletConfig);
 
 			Container.Bind<StateMachineFactory>().AsSingle();
@@ -61,7 +57,6 @@ namespace Assets.Scrips
 			Container.Bind<IInputManager>().To<InputManager>().FromNewComponentOnRoot().AsSingle();
 
             Container.Bind<IDataStorage>().To<DataStorage>().AsSingle();
-			Container.Bind<IGameConfig>().FromInstance(new GameConfig(_gameConfig));
 
 			Container.Bind(typeof(IActionsSequencer), typeof(ITickable)).To<ActionsSequencer>().AsSingle();
 

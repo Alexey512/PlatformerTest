@@ -19,8 +19,11 @@ MonoBehaviour:
   - Id: Player
     Prefab: {fileID: 2153044437303296229, guid: 1ffda09b383320344bdf901f7387ddc2,
       type: 3}
-  - Id: Enemy
+  - Id: enemy_0
     Prefab: {fileID: 5862405474630928420, guid: 97b08ca0dae78d546a4e586464fd53c2,
+      type: 3}
+  - Id: enemy_1
+    Prefab: {fileID: 8383582740944216739, guid: 769c6720628f5f749a9700f263e8d1fc,
       type: 3}
   - Id: Bullet
     Prefab: {fileID: 7762093743265148864, guid: f60bb96a24135f4428e1f602596deb25,

@@ -18,18 +18,18 @@ namespace Assets.Scripts.Game.Units.Enemy
 	{
 		public event Action<EnemyController> Death;
 		
-		[Inject]
-		private EnemyConfig _config;
+		public EnemyConfigs.Config Config => _config;
+
+		private EnemyConfigs.Config _config;
 
 		[SerializeField]
 		private TextMeshPro _halthLabel;
 
-		public void ResetParams()
+		public void SetConfig(EnemyConfigs.Config config)
 		{
-			Model.Health = Random.Range(_config.MinHealth, _config.MaxHealth);
-			Model.Damage = Random.Range(_config.MinDamage, _config.MaxDamage);
+			_config = config;
+			ResetParams();
 		}
-
 		protected override void OnInitialize()
 		{
 			ResetParams();
@@ -43,6 +43,17 @@ namespace Assets.Scripts.Game.Units.Enemy
 			StateMachine.AddTransition(EnemyStateType.Damage, EnemyEventType.Damage);
 
 			StateMachine.SetInitialState(EnemyStateType.Move);
+		}
+
+		private void ResetParams()
+		{
+			if (_config == null)
+			{
+				return;
+			}
+
+			Model.Health = Random.Range(_config.MinHealth, _config.MaxHealth);
+			Model.Damage = Random.Range(_config.MinDamage, _config.MaxDamage);
 		}
 
 		private void OnChangeState(State state, State prevState)
