@@ -16,5 +16,6 @@ MonoBehaviour:
   MaxSpeed: 5
   Speed: 3
   JumpHeight: 6.5
-  MaxHealth: 100
+  MaxHealth: 1
   WeaponId: Bullet
+  RoF: 0.3

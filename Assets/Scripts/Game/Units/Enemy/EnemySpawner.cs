@@ -22,6 +22,8 @@ namespace Assets.Scripts.Game.Units.Enemy
 
 		private TrackManager _trackManager;
 
+		private List<EnemyController> _enemies = new List<EnemyController>();
+
 		[Inject]
 		private void Construct(IPrefabsFactory factory, VisualRoot visualRoot, TrackManager trackManager)
 		{
@@ -41,9 +43,26 @@ namespace Assets.Scripts.Game.Units.Enemy
 			if (enemy != null)
 			{
 				enemy.transform.position = _trackManager.GetEnemySpawnPosition();
+				
+				enemy.Death += OnEnemyDeath;
+
+				_enemies.Add(enemy);
 			}
 
 			return enemy;
+		}
+
+		public void Clear()
+		{
+			foreach (var enemy in _enemies)
+			{
+				_factory.Remove(enemy.gameObject, true);
+			}
+		}
+
+		private void OnEnemyDeath(EnemyController enemy)
+		{
+			_enemies.Remove(enemy);
 		}
 	}
 }

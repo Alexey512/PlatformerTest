@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Assets.Scrips.Common.FSM;
-using Assets.Scrips.Game.Player;
-using UnityEngine;
-using EventArgs = Assets.Scrips.Common.FSM.EventArgs;
 
-namespace Assets.Scripts.Game.Player
+namespace Assets.Scripts.Game.Units.Enemy
 {
-	public class DamageState: PlayerState
+	public class DamageState: EnemyState
 	{
-		public DamageState(PlayerController player) : base(PlayerStateType.Damage, player)
+		public DamageState(EnemyController player) : base(EnemyStateType.Damage, player)
 		{
 		}
 
@@ -25,7 +21,7 @@ namespace Assets.Scripts.Game.Player
 				Unit.Model.Health -= damage;
 				if (Unit.Model.Health <= 0)
 				{
-					Owner.SwitchState(PlayerStateType.Death);
+					Owner.SwitchState(EnemyStateType.Death);
 				}
 			}
 

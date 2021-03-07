@@ -29,9 +29,10 @@ namespace Assets.Scripts.Game.Player
 		public void SetPlayer(PlayerController player)
 		{
 			_player = player;
+			UpdatePositition();
 		}
 
-		private void Update()
+		private void UpdatePositition()
 		{
 			if (_camera == null || _player == null)
 			{
@@ -40,6 +41,11 @@ namespace Assets.Scripts.Game.Player
 
 			var followPos = _player.Owner.Position + _offset;
 			_camera.transform.position = new Vector3(followPos.x, followPos.y, _camera.transform.position.z);
+		}
+
+		private void Update()
+		{
+			UpdatePositition();
 		}
 	}
 }

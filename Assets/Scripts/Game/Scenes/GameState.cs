@@ -57,6 +57,8 @@ namespace Assets.Scrips.Game.Scenes
 
 			_player.Owner.Position = _trackManager.GetSpawnPosition();
 
+			_player.ResetParams();
+
 			_camera.SetPlayer(_player);
 
 			_trackManager.SetCamera(_camera.Camera);
@@ -79,6 +81,8 @@ namespace Assets.Scrips.Game.Scenes
 				_prefabsFactory.Remove(_player.gameObject, true);
 				_player = null;
 			}
+
+			_enemySpawner.Clear();
 
 			_trackManager.IsActive = false;
 			_trackManager.Clear();

@@ -8,9 +8,9 @@ using Assets.Scrips.Common.InputSystem;
 using Assets.Scripts.Common.Visual;
 using Assets.Scripts.Game.Player;
 using Assets.Scripts.Game.Units;
-using Assets.Scripts.Game.Units.Enemy;
 using UnityEngine;
 using Zenject;
+using DamageState = Assets.Scripts.Game.Player.DamageState;
 using DeathState = Assets.Scripts.Game.Player.DeathState;
 using EventArgs = Assets.Scrips.Common.FSM.EventArgs;
 
@@ -30,11 +30,16 @@ namespace Assets.Scrips.Game.Player
 
 		private WeaponController _weaponController;
 
+		public void ResetParams()
+		{
+			Model.Health = _config.MaxHealth;
+		}
+
 		protected override void OnInitialize()
 		{
 			_weaponController = new WeaponController(_config);
-			
-			Model.Health = _config.MaxHealth;
+
+			ResetParams();
 
 			Owner.UnitCollision += UnitCollision;
 			
@@ -64,23 +69,15 @@ namespace Assets.Scrips.Game.Player
 
 		private void UnitCollision(IUnit unit)
 		{
-			var enemyModel = unit.GetModel<EnemyModel>();
+			var enemyModel = unit.GetModel<Assets.Scripts.Game.Units.Enemy.EnemyModel>();
 			if (enemyModel != null)
 			{
 				var data = new EventArgs();
 				data.SetValue("Damage", enemyModel.Damage);
 
-				StateMachine.HandleEvent(PlayerEventType.Damage);
+				StateMachine.HandleEvent(PlayerEventType.Damage, data);
 
 				Damage?.Invoke(enemyModel.Damage);
-			}
-		}
-
-		private void UpdateHealth()
-		{
-			if (Model.Health <= 0)
-			{
-				StateMachine.HandleEvent(PlayerEventType.Death);
 			}
 		}
 
@@ -105,7 +102,6 @@ namespace Assets.Scrips.Game.Player
 		protected override void OnUpdate()
 		{
 			UpdateWeapon();
-			UpdateHealth();
 		}
 	}
 }

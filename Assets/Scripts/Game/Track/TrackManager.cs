@@ -20,7 +20,7 @@ namespace Assets.Scripts.Game.Track
 
 		public Vector3 GetEnemySpawnPosition()
 		{
-			return new Vector3(_chunksRect.xMax - _spawnOffset / 2, _chunksRect.yMax);
+			return new Vector3(_chunksRect.xMax + _spawnOffset / 2, _chunksRect.yMax);
 		}
 
 		public void SetCamera(Camera camera)
