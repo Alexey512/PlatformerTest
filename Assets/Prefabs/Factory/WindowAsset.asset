@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34e415166db0e2e40a186a7557ee61bd, type: 3}
   m_Name: WindowAsset
   m_EditorClassIdentifier: 
-  _Prefabs: []
+  _Prefabs:
+  - Id: MainMenu
+    Prefab: {fileID: 8396785141357269279, guid: 1b015223f4c2f9c4fa2c04ee2030624d,
+      type: 3}

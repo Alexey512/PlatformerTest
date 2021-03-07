@@ -61,7 +61,14 @@ namespace Assets.Scrips.Game.Scenes
 
 		public override void Exit(State nextState)
 		{
-			
+			if (_player)
+			{
+				_prefabsFactory.Remove(_player.gameObject, true);
+				_player = null;
+			}
+
+			_trackManager.IsActive = false;
+			_trackManager.Clear();
 		}
 
 		public override void Update()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Assets.Scrips.Common.Utils;
 using JetBrains.Annotations;
 using TMPro.EditorUtilities;
 using UnityEngine;
@@ -58,6 +59,11 @@ namespace Assets.Scripts.Game.Track
 
 		private int _visibleChunksCount;
 
+		public void Clear()
+		{
+			transform.RemoveAllChildren();
+		}
+
 		private TrackChunk AssignChunk()
 		{
 			if (_chunkPref == null)
@@ -96,6 +102,11 @@ namespace Assets.Scripts.Game.Track
 
 		private void Update()
 		{
+			if (!_active)
+			{
+				return;
+			}
+
 			UpdateChunks();
 		}
 

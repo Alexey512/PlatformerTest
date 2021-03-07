@@ -31,7 +31,7 @@ namespace Assets.Scrips.Game.Scenes
 		{
 			if (_prefabsFactory.IsComplete)
 			{
-				Owner.SwitchState("Game");
+				Owner.SwitchState("MainMenu");
 			}
 		}
 	}
