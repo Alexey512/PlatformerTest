@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Assets.Scrips.Common.FSM;
 using Assets.Scrips.Common.InputSystem;
 using UnityEngine;
+using EventArgs = Assets.Scrips.Common.FSM.EventArgs;
 
 namespace Assets.Scrips.Game.Player
 {
@@ -13,6 +14,11 @@ namespace Assets.Scrips.Game.Player
 	{
 		public RunState(PlayerController owner) : base(PlayerStateType.Run, owner)
 		{
+		}
+
+		public override void Enter(State prevState, EventArgs args = null)
+		{
+			Unit.Animator.SetBool("IsMove", true);
 		}
 
 		public override void Update()

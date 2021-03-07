@@ -21,7 +21,12 @@ namespace Assets.Scrips.Game.Player
 		public event Action<float> Damage; 
 
 		public event Action Death;
-		
+
+		public Animator Animator => _animator;
+
+		[SerializeField]
+		private Animator _animator;
+
 		[Inject]
 		private IInputManager _inputManager;
 

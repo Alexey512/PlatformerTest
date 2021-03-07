@@ -20,6 +20,8 @@ namespace Assets.Scrips.Game.Player
 			if (Unit.Owner.IsGrounded)
 			{
 				Unit.Owner.Velocity = new Vector2(Unit.Owner.Velocity.x, Config.JumpHeight);
+
+				Unit.Animator.SetTrigger("IsJump");
 			}
 
 			Owner.PopState();
